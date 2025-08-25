@@ -1,0 +1,866 @@
+/*------------------
+  Base & Themes
+------------------*/
+.home-page {
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  min-height: 100vh;
+}
+
+.light-mode {
+  background-color: #f5f5f5; /* A light gray background */
+  color: #222;
+}
+
+.dark-mode {
+  background-color: transparent; /* Consistent dark background for all sections */
+  color: #fff;
+}
+
+/*------------------
+  Hero Section
+------------------*/
+.hero-container-about {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* Background Overlay */
+.hero-container-about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Place the overlay above the video */
+}
+
+.hero-video-about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* Keep the video behind the overlay */
+}
+
+.hero-content-about {
+  position: relative;
+  z-index: 2; /* Ensure the content is above the overlay */
+  max-width: 800px;
+  padding: 0 10px;
+}
+
+.hero-tagline-about {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInDown 1.5s ease-out;
+}
+
+.hero-paragraph-about {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 1.5s ease-out 0.5s forwards;
+}
+
+.hero-btns-about .btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  animation: fadeInScale 1.5s ease-out 1s forwards;
+}
+
+.hero-btns-about .btn:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/*------------------
+  Animations
+------------------*/
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/*------------------
+  New Mission Section
+------------------*/
+.mission-section-new {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mission-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* Creates a cool frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: cardFadeIn 1.5s ease-out forwards;
+}
+
+.mission-quote-container {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.mission-title-new {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #000000; /* A light, subtle color */
+  margin-bottom: 5px;
+}
+
+.mission-quote {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-style: italic;
+  margin: 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.mission-quote::before {
+  content: '“';
+  font-size: 4rem;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ff6347; /* Accent color for the quote mark */
+  line-height: 1;
+  transform: translateY(-5px);
+}
+
+.mission-text-container {
+  text-align: justify;
+}
+
+.mission-text-new {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Dark mode specific styles */
+.dark-mode .mission-card {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .mission-title-new,
+.dark-mode .mission-quote,
+.dark-mode .mission-text-new {
+  color: #fff;
+}
+
+.dark-mode .mission-quote::before {
+  color: #ff6347; /* A lighter blue accent */
+}
+
+/* Animations */
+@keyframes cardFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/*------------------
+  Vision Section
+------------------*/
+.vision-section {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.vision-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* Creates a cool frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: cardFadeIn 1.5s ease-out forwards;
+}
+
+.vision-quote-container {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.vision-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c0c0c0; /* A light, subtle color */
+  margin-bottom: 5px;
+}
+
+.vision-quote {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-style: italic;
+  margin: 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.vision-quote::before {
+  content: '“';
+  font-size: 4rem;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color:#ff6347; /* Accent color for the quote mark */
+  line-height: 1;
+  transform: translateY(-5px);
+}
+
+.vision-text-container {
+  text-align: justify;
+}
+
+.vision-text-new {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Dark mode specific styles */
+.dark-mode .vision-card {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .vision-title,
+.dark-mode .vision-quote,
+.dark-mode .vision-text-new {
+  color: #fff;
+}
+
+.dark-mode .vision-quote::before {
+  color: #ff6347; /* A lighter blue accent */
+}
+
+/* The 'cardFadeIn' animation is already defined for the mission section, and it can be reused here. */
+/*------------------
+  Our Story Section - New Style
+------------------*/
+.story-section {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: inherit;
+  text-align: center;
+}
+
+.story-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.story-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.timeline-wrapper {
+  position: relative;
+  padding-left: 50px; /* Space for the timeline line */
+}
+
+/* The vertical timeline line */
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: #ff6347;
+}
+
+.timeline-item-new {
+  position: relative;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
+/* The small circle on the timeline line */
+.timeline-dot {
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-year {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #c0c0c0;
+}
+
+.timeline-content-new {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  margin-left: 20px;
+}
+
+.story-title-new {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.story-text-new {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Dark mode specific styles */
+.dark-mode .timeline-year {
+  color: #aaa;
+}
+
+.dark-mode .timeline-content-new {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .timeline-wrapper {
+    padding-left: 20px;
+  }
+  .timeline-wrapper::before {
+    left: 0;
+  }
+  .timeline-dot {
+    left: -9px;
+  }
+  .timeline-year {
+    font-size: 1.2rem;
+  }
+  .timeline-content-new {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  .story-heading {
+    font-size: 2rem;
+  }
+}
+/*
+/*------------------
+  Event Description Section - Refined Style
+------------------*/
+.event-description-section-new {
+  padding: 0px 20px;
+  background-color: #f8f8f8; /* Light gray background for the section */
+  color: #333; /* Darker text color */
+  text-align: center;
+  padding-top: 0px;
+}
+
+.container-new-style {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* Add some padding to the container */
+}
+
+.section-title-new {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  color: #2c3e50; /* Dark blue title */
+}
+
+.overview-new-style {
+  font-size: 1.2rem;
+  max-width: 750px;
+  margin: 0 auto 60px;
+  line-height: 1.7;
+  color: #555;
+}
+
+.benefits-grid-new {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .benefits-grid-new {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefits-grid-new {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.benefit-item-new-style {
+  background-color: #fff; /* White background for items */
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.benefit-item-new-style:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.benefit-icon-new-style {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #3498db; /* A bright blue for icons */
+}
+
+.benefit-heading-new-style {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.benefit-text-new-style {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Animation (optional, but keeps some visual interest) */
+.benefit-item-new-style {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSlideUp 0.8s forwards;
+}
+
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode adjustments if applicable */
+.dark-mode .event-description-section-new {
+  background-color: transparent;
+  color: #f8f8f8;
+}
+
+.dark-mode .section-title-new,
+.dark-mode .benefit-heading-new-style {
+  color: #fff;
+}
+
+.dark-mode .overview-new-style,
+.dark-mode .benefit-text-new-style {
+  color: #ddd;
+}
+
+.dark-mode .benefit-item-new-style {
+  background-color: #ff6347;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .benefit-icon-new-style {
+  color: #3498db; /* Keep the bright blue */
+}/*Team Section*/
+.team-section {
+  padding: 05px 20px;
+  background-color: transparent;
+  color: inherit;
+  text-align: center;
+}
+
+.team-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.team-description {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  line-height: 1.5;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.member-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff6347;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-photo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.member-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.member-role {
+  font-size: 1rem;
+  color: #888;
+}
+
+.dark-mode .member-role {
+  color: #aaa;
+}
+/*------------------
+  Event Description Section - New Style
+------------------*/
+.event-description-section {
+  padding: 80px 20px;
+  background-color: transparent;
+  color: #fff; /* Assuming a dark background, adjust as needed */
+  text-align: center;
+}
+
+.container-new {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.overview-new {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  line-height: 1.5;
+  color: #c0c0c0;
+}
+
+.benefits-list-new {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.benefit-item-new {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 5px solid #ff6347; /* Accent line for visual interest */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  /* Initial state for animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInFade 0.8s forwards;
+}
+
+.benefit-icon-new {
+  font-size: 2rem;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-text-new {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Keyframes for the animation */
+@keyframes slideInFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .overview-new {
+    font-size: 1rem;
+  }
+}
+/*------------------
+  Event Description Section - Refined Style
+------------------*/
+.event-description-section-new {
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+  color: #333;
+  text-align: center;
+}
+
+/* ... (Your other styles for container, titles, etc.) ... */
+
+/* Initial state (hidden) */
+.benefit-item-new-style {
+  opacity: 0;
+  transform: translateY(20px);
+  /* Remove the animation property from here */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Final state (visible), triggered by the .visible class on the parent */
+.event-description-section-new.visible .benefit-item-new-style {
+  animation: fadeInSlideUp 0.8s forwards;
+}
+
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/*------------------
+  Minimal Contact Section
+------------------*/
+.contact-section-minimal {
+  padding: 10px 20px;
+  background-color: #f8f8f8; /* Light gray background */
+  text-align: center;
+}
+
+.contact-container-minimal {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-tagline-minimal {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.contact-text-minimal {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.contact-button-minimal {
+  display: inline-block;
+  padding: 18px 40px;
+  background-color: #ff6347; /* Your primary accent color */
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-button-minimal:hover {
+  background-color: #e65c40;
+  transform: translateY(-3px);
+}
+
+/* Dark mode specific styles */
+.dark-mode .contact-section-minimal {
+  background-color: transparent;
+}
+
+.dark-mode .contact-tagline-minimal {
+  color: #fff;
+}
+
+.dark-mode .contact-text-minimal {
+  color: #ddd;
+}
+/*------------------
+  Team Section Animations
+------------------*/
+/* Initial state (hidden) */
+.team-member {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Final state (visible), triggered by the .visible class on the parent */
+.team-section.visible .team-member {
+  animation: slideInFade 0.8s forwards;
+}
+
+/*------------------
+  Our Story Section Animations
+------------------*/
+/* Initial state (hidden) */
+.timeline-item-new {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Final state (visible) */
+.story-section.visible .timeline-item-new {
+  animation: slideInFade 1s forwards;
+}
+
+/*------------------
+  Why Attend? Section Animations
+------------------*/
+/* Initial state (hidden) */
+.benefit-item-new-style {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Final state (visible) */
+.event-description-section-new.visible .benefit-item-new-style {
+  animation: fadeInSlideUp 0.8s forwards;
+}
+
+/* Shared keyframes for animations */
+@keyframes slideInFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    
+    transform: translateY(0);
+  }
+}

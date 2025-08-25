@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/*------------------
+  Base & Themes
+------------------*/
+.home-page {
+  font-family: 'Roboto', sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  min-height: 100vh;
+}
+
+.light-mode {
+  background-color: #f5f5f5; /* A light gray background */
+  color: #222;
+}
+
+.dark-mode {
+   background-color: transparent; /* Consistent dark background for all sections */
+  color: #fff;
+}
+
+/*------------------
+  Hero Section
+------------------*/
+.hero-container-home2 {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+.hero-video-home2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-content-home2 {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 10px;
+}
+.hero-tagline-home2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInDown 1.5s ease-out;
+}
+.hero-paragraph-home2 {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 1.5s ease-out 0.5s forwards;
+}
+.hero-btns-home2 .btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  animation: fadeInScale 1.5s ease-out 1s forwards;
+}
+.hero-btns-home2 .btn:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
+/*second section*/
+/* Dark Mode Overrides for "Who We Are" Section */
+
+.dark-mode .who-we-are-section {
+   background-color: transparent; /* Dark background color */
+}
+
+.dark-mode .who-we-are-title {
+  color: #fff; /* White title text */
+}
+
+.dark-mode .who-we-are-description {
+  color: #ccc; /* Lighter gray for body text */
+}
+
+.dark-mode .who-we-are-image {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1); /* Lighter shadow for visibility in dark mode */
+}
+
+/* Base Styles (unchanged from your original code) */
+.who-we-are-section {
+  padding: 60px 20px;
+  background-color: #f8f8f8;
+}
+
+.who-we-are-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.who-we-are-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.who-we-are-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.who-we-are-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.who-we-are-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 75vh;
+}
+
+.who-we-are-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .who-we-are-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .who-we-are-text,
+  .who-we-are-image {
+    padding-right: 0;
+  }
+  
+  /* Adjust image height for mobile view */
+  .who-we-are-image {
+    height: auto; /* Allow image to resize naturally */
+  }
+}
+/*third section*/
+.why-attend-section {
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  
+  /* Add a semi-transparent black overlay */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff; /* Set a default white text color for the section */
+}
+
+.why-attend-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.why-attend-subtitle {
+  font-size: 0.9rem;
+  color: #ffffff; /* A light, contrasting blue for the subtitle */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.why-attend-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff; /* White title for maximum contrast */
+  margin: 0;
+}
+
+.why-attend-divider {
+  width: 60px;
+  height: 3px;
+  background-color: #ffffff; /* Matches the new subtitle color */
+  margin: 20px auto 30px;
+}
+
+.why-attend-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f0f0f0; /* Off-white for body text to reduce eye strain */
+  margin-bottom: 30px;
+}
+
+.why-attend-button {
+  padding: 15px 40px;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.why-attend-button:hover {
+  background-color: #e65239;
+}
+
+
+/*------------------
+  Event Gallery Section
+------------------*/
+.event-gallery-section {
+  padding: 10px 20px;
+  background-color: #f8f8f8; /* Light gray background */
+  text-align: center;
+}
+
+.dark-mode .event-gallery-section {
+ background-color: transparent; /* Dark background */
+  color: #fff;
+}
+
+.gallery-header-container {
+  margin-bottom: 40px;
+}
+
+.gallery-subtitle {
+  font-size: 0.9rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dark-mode .gallery-subtitle {
+    color: #ccc;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+}
+
+.dark-mode .gallery-title {
+    color: #fff;
+}
+
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows images to wrap on smaller screens */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Base styles for a single image with overlay */
+.image-container {
+  flex: 1; 
+  max-width: 25%; 
+  height: 250px; 
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* The hover effect to reveal the overlay */
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.image-container:hover .image {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments for the gallery section */
+@media (max-width: 768px) {
+  .gallery-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-container {
+    max-width: 100%;
+    height: 250px;
+  }
+}
+/*------------------
+  Client Logos Section*/
+.clients-section {
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #fff;
+    transition: background-color 0.5s ease;
+}
+
+.dark-mode .clients-section {
+     background-color: transparent;
+}
+
+.clients-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    transition: color 0.5s ease;
+}
+
+.dark-mode .clients-header h2 {
+    color: #fff;
+}
+
+.header-line {
+    position: relative;
+    width: 60px;
+    height: 1px;
+    background-color: #999;
+    margin: 0 auto 40px;
+    transition: background-color 0.5s ease;
+}
+
+.dark-mode .header-line {
+    background-color: #555;
+}
+
+.header-line .dot {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: #ff6347;
+    border-radius: 50%;
+}
+
+.logos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 150px;
+    max-width: 180px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.logo-item img {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.logo-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* The animation trigger class */
+.logos-container.animated .logo-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dark Mode styles for the logos */
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logos-container {
+        gap: 20px;
+    }
+    .logo-item {
+        flex-basis: 100px;
+    }
+}
+/*contact us section*/
+.simple-hero-container-contact {
+  background-color: #000;
+  color: #fff;
+  position: relative;
+  padding: 60px 20px;
+}
+
+
+.simple-hero-button-contact {
+  background-color: #ff6347;          /* Bold and warm (Tomato) */
+  color: #fff;
+  border: 2px solid #ff6347;
+  border-radius: 5px;
+  padding: 15px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.simple-hero-button-contact:hover {
+  background-color: transparent;
+  color: #ff6347;
+  transform: translateY(-3px);
+}
+.simple-hero-container-contact {
+  text-align: center;
+}
+
+.simple-hero-button-contact {
+  display: inline-block;
+}

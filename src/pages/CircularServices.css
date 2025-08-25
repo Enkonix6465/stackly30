@@ -1,0 +1,172 @@
+/* Add the keyframes for the animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Base styles for the section */
+.circular-services-section {
+  padding: 10px px;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.circular-services-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0px;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.circular-services-content-wrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  text-align: left;
+}
+
+.section-header-line {
+  width: 50px;
+  height: 3px;
+  background-color: #ff6347;
+  margin-bottom: 10px;
+}
+
+.section-sub-heading {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.section-main-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.section-tagline {
+  font-size: 1.1rem;
+  color: #777;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.content-break {
+  width: 5px;
+  height: 5px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.section-description-circle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Circular Layout styles (right side) */
+.circular-layout-wrapper {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 1s ease-in, transform 1s ease-in;
+}
+
+/* The class that triggers the animation */
+.circular-layout-wrapper.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.center-circle {
+  width: 150px;
+  height: 150px;
+  background-color: #fce473;
+  color: #111;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border: 5px solid #ff6347;
+}
+
+.service-circle {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  
+  /* Initial state: circles are invisible and in the center */
+  opacity: 0;
+  transform: rotate(var(--angle)) translate(0) rotate(calc(-1 * var(--angle))) scale(0.5);
+}
+
+/* Animate to the final state */
+.circular-layout-wrapper.animate .service-circle {
+  animation: none; /* Remove previous animation */
+  opacity: 1;
+  transform: rotate(var(--angle)) translate(200px) rotate(calc(-1 * var(--angle))) scale(1);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transition-delay: var(--delay);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .circular-services-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .circular-layout-wrapper {
+    width: 80vw;
+    height: 80vw;
+  }
+  .service-circle {
+    width: 80px;
+    height: 80px;
+    font-size: 0.7rem;
+    transform: rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle))) scale(1);
+  }
+}
+.circular-services-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
