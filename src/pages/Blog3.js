@@ -1,90 +1,313 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const translations = {
+  en: {
+    title: "Budgeting for Your Dream Wedding",
+    subtitle: "Creative financial planning for your special day",
+    nav: [
+      "Financial Architecture",
+      "Money Alchemy",
+      "Budget Visualization"
+    ],
+    sectionTitles: [
+      "Financial Architecture: Building Your Budget Framework",
+      "Money Alchemy: Transforming Your Budget Constraints",
+      "Budget Visualization: Seeing Your Financial Landscape"
+    ],
+    cards: [
+      [
+        {
+          icon: "🏛️",
+          title: "The Foundation Stones",
+          text: "Your non-negotiables form the foundation of your wedding budget. Identify what matters most to you as a couple—whether it's photography, food, or venue—and allocate resources accordingly.",
+          list: [
+            "Prioritize your top 3 must-haves",
+            "Assign percentage values to each category",
+            "Build flexibility for unexpected expenses"
+          ]
+        },
+        {
+          icon: "📊",
+          title: "The Pillars of Allocation",
+          text: "Create structural pillars for your budget that support your vision. Traditional percentage allocations provide a starting point, but customize based on your priorities.",
+          pillars: [
+            { label: "Venue & Catering (65%)", height: '70%', color: '#ff6347' },
+            { label: "Visuals & Memories (20%)", height: '50%', color: '#333' },
+            { label: "Attire & Beauty (10%)", height: '30%', color: '#666' },
+            { label: "Miscellaneous (5%)", height: '20%', color: '#999' }
+          ]
+        }
+      ],
+      [
+        {
+          icon: "⚗️",
+          title: "The Philosopher's Stone",
+          text: "Learn the art of transforming budgetary limitations into creative opportunities. Constraints often breed innovation in wedding planning.",
+          tipTitle: "Creative Solutions:",
+          tips: [
+            "Off-peak season discounts (20-30% savings)",
+            "Digital invitations vs. traditional printed",
+            "Local seasonal flowers instead of imports",
+            "DIY decor with personal significance"
+          ]
+        },
+        {
+          icon: "🔍",
+          title: "The Magnifying Glass",
+          text: "Identify hidden costs that often surprise couples and learn how to anticipate them in your budgeting process.",
+          hiddenCosts: [
+            { label: "Postage for invitations", value: "$100-300" },
+            { label: "Marriage license", value: "$50-150" },
+            { label: "Vendor meals", value: "$200-500" },
+            { label: "Overtime fees", value: "$200-800" }
+          ]
+        }
+      ],
+      [
+        {
+          chartTitle: "Typical Wedding Budget Allocation",
+          budgetData: [
+            { category: 'Venue', percentage: 40, color: '#ff6347' },
+            { category: 'Catering', percentage: 25, color: '#333' },
+            { category: 'Photography', percentage: 10, color: '#666' },
+            { category: 'Attire', percentage: 8, color: '#999' },
+            { category: 'Entertainment', percentage: 7, color: '#ccc' },
+            { category: 'Decor', percentage: 5, color: '#ff6347' },
+            { category: 'Miscellaneous', percentage: 5, color: '#eee' }
+          ],
+          tipsTitle: "Smart Saving Strategies",
+          tips: [
+            { header: "The 10% Buffer Rule", text: "Always keep 10% of your total budget unallocated for unexpected expenses." },
+            { header: "The Three-Quotes Rule", text: "Get at least three quotes for each major vendor to ensure competitive pricing." },
+            { header: "The Priority-Based Cutting", text: "If you need to reduce costs, start with categories lowest on your priority list." }
+          ]
+        }
+      ]
+    ]
+  },
+  ar: {
+    title: "ميزانية لحفل زفاف أحلامك",
+    subtitle: "تخطيط مالي إبداعي ليومك المميز",
+    nav: [
+      "الهيكل المالي",
+      "كيمياء المال",
+      "تصور الميزانية"
+    ],
+    sectionTitles: [
+      "الهيكل المالي: بناء إطار الميزانية",
+      "كيمياء المال: تحويل قيود الميزانية",
+      "تصور الميزانية: رؤية المشهد المالي"
+    ],
+    cards: [
+      [
+        {
+          icon: "🏛️",
+          title: "أسس الميزانية",
+          text: "تشكل العناصر الأساسية أساس ميزانية الزفاف. حدد ما يهمك أكثر كزوجين—سواء التصوير أو الطعام أو المكان—وقم بتخصيص الموارد وفقًا لذلك.",
+          list: [
+            "حدد أهم 3 أولويات لديك",
+            "خصص نسب مئوية لكل فئة",
+            "ضع مرونة للمصاريف غير المتوقعة"
+          ]
+        },
+        {
+          icon: "📊",
+          title: "ركائز التخصيص",
+          text: "أنشئ ركائز هيكلية لميزانيتك تدعم رؤيتك. النسب التقليدية نقطة بداية، لكن خصصها حسب أولوياتك.",
+          pillars: [
+            { label: "المكان والطعام (65%)", height: '70%', color: '#ff6347' },
+            { label: "الذكريات البصرية (20%)", height: '50%', color: '#333' },
+            { label: "الملابس والجمال (10%)", height: '30%', color: '#666' },
+            { label: "متفرقات (5%)", height: '20%', color: '#999' }
+          ]
+        }
+      ],
+      [
+        {
+          icon: "⚗️",
+          title: "حجر الفلاسفة",
+          text: "تعلم فن تحويل قيود الميزانية إلى فرص إبداعية. غالبًا ما تولد القيود الابتكار في تخطيط الزفاف.",
+          tipTitle: "حلول إبداعية:",
+          tips: [
+            "خصومات خارج الموسم (توفير 20-30%)",
+            "دعوات رقمية بدل المطبوعة التقليدية",
+            "زهور موسمية محلية بدل المستوردة",
+            "ديكور DIY ذو معنى شخصي"
+          ]
+        },
+        {
+          icon: "🔍",
+          title: "العدسة المكبرة",
+          text: "حدد التكاليف المخفية التي تفاجئ الأزواج غالبًا وتعلم كيف تتوقعها في عملية الميزانية.",
+          hiddenCosts: [
+            { label: "تكلفة إرسال الدعوات", value: "$100-300" },
+            { label: "رخصة الزواج", value: "$50-150" },
+            { label: "وجبات الموردين", value: "$200-500" },
+            { label: "رسوم العمل الإضافي", value: "$200-800" }
+          ]
+        }
+      ],
+      [
+        {
+          chartTitle: "توزيع ميزانية الزفاف النموذجية",
+          budgetData: [
+            { category: 'المكان', percentage: 40, color: '#ff6347' },
+            { category: 'الطعام', percentage: 25, color: '#333' },
+            { category: 'التصوير', percentage: 10, color: '#666' },
+            { category: 'الملابس', percentage: 8, color: '#999' },
+            { category: 'الترفيه', percentage: 7, color: '#ccc' },
+            { category: 'الديكور', percentage: 5, color: '#ff6347' },
+            { category: 'متفرقات', percentage: 5, color: '#eee' }
+          ],
+          tipsTitle: "استراتيجيات التوفير الذكي",
+          tips: [
+            { header: "قاعدة 10% للطوارئ", text: "احتفظ دائمًا بـ 10% من الميزانية للمصاريف غير المتوقعة." },
+            { header: "قاعدة الثلاث عروض", text: "احصل على ثلاث عروض أسعار لكل مورد رئيسي لضمان أفضل سعر." },
+            { header: "التخفيض حسب الأولوية", text: "إذا احتجت لتقليل التكاليف، ابدأ بالفئات الأقل أهمية." }
+          ]
+        }
+      ]
+    ]
+  },
+  he: {
+    title: "תקצוב לחתונת החלומות שלך",
+    subtitle: "תכנון פיננסי יצירתי ליום המיוחד שלך",
+    nav: [
+      "ארכיטקטורה פיננסית",
+      "אלכימיית הכסף",
+      "ויזואליזציית התקציב"
+    ],
+    sectionTitles: [
+      "ארכיטקטורה פיננסית: בניית מסגרת התקציב",
+      "אלכימיית הכסף: להפוך מגבלות להזדמנויות",
+      "ויזואליזציית התקציב: לראות את הנוף הפיננסי"
+    ],
+    cards: [
+      [
+        {
+          icon: "🏛️",
+          title: "אבני היסוד",
+          text: "הדברים שלא מתפשרים עליהם הם הבסיס לתקציב החתונה. הגדירו מה הכי חשוב לכם—צילום, אוכל או מקום—והקצו משאבים בהתאם.",
+          list: [
+            "הגדירו את שלושת העדיפויות העליונות",
+            "הקצו אחוזים לכל קטגוריה",
+            "השאירו גמישות להוצאות בלתי צפויות"
+          ]
+        },
+        {
+          icon: "📊",
+          title: "עמודי ההקצאה",
+          text: "צרו עמודי תקציב שתומכים בחזון שלכם. חלוקות אחוזים מסורתיות הן התחלה, אבל התאימו לפי סדרי עדיפויות.",
+          pillars: [
+            { label: "מקום ואוכל (65%)", height: '70%', color: '#ff6347' },
+            { label: "ויזואליות וזיכרונות (20%)", height: '50%', color: '#333' },
+            { label: "לבוש וטיפוח (10%)", height: '30%', color: '#666' },
+            { label: "שונות (5%)", height: '20%', color: '#999' }
+          ]
+        }
+      ],
+      [
+        {
+          icon: "⚗️",
+          title: "אבן החכמים",
+          text: "למדו להפוך מגבלות תקציב להזדמנויות יצירתיות. מגבלות מעודדות חדשנות בתכנון חתונה.",
+          tipTitle: "פתרונות יצירתיים:",
+          tips: [
+            "הנחות מחוץ לעונה (חיסכון של 20-30%)",
+            "הזמנות דיגיטליות במקום מודפסות",
+            "פרחים עונתיים מקומיים במקום יבוא",
+            "עיצוב DIY עם משמעות אישית"
+          ]
+        },
+        {
+          icon: "🔍",
+          title: "זכוכית המגדלת",
+          text: "זהו עלויות נסתרות שמפתיעות זוגות ולמדו איך לצפות להן בתקציב.",
+          hiddenCosts: [
+            { label: "דמי משלוח להזמנות", value: "$100-300" },
+            { label: "רישיון נישואין", value: "$50-150" },
+            { label: "ארוחות לספקים", value: "$200-500" },
+            { label: "דמי שעות נוספות", value: "$200-800" }
+          ]
+        }
+      ],
+      [
+        {
+          chartTitle: "חלוקת תקציב חתונה טיפוסית",
+          budgetData: [
+            { category: 'מקום', percentage: 40, color: '#ff6347' },
+            { category: 'אוכל', percentage: 25, color: '#333' },
+            { category: 'צילום', percentage: 10, color: '#666' },
+            { category: 'לבוש', percentage: 8, color: '#999' },
+            { category: 'בידור', percentage: 7, color: '#ccc' },
+            { category: 'עיצוב', percentage: 5, color: '#ff6347' },
+            { category: 'שונות', percentage: 5, color: '#eee' }
+          ],
+          tipsTitle: "אסטרטגיות חיסכון חכמות",
+          tips: [
+            { header: "כלל 10% רזרבה", text: "השאירו תמיד 10% מהתקציב להוצאות בלתי צפויות." },
+            { header: "כלל שלוש הצעות מחיר", text: "קבלו לפחות שלוש הצעות מחיר לכל ספק מרכזי." },
+            { header: "קיצוץ לפי סדרי עדיפויות", text: "אם צריך להוזיל, התחילו מהקטגוריות הפחות חשובות." }
+          ]
+        }
+      ]
+    ]
+  }
+};
 
 const Blog3 = () => {
+  const { language } = useLanguage();
   const [activeSection, setActiveSection] = useState(0);
-  
-  // Budget allocation data for the chart
-  const budgetData = [
-    { category: 'Venue', percentage: 40, color: '#ff6347' },
-    { category: 'Catering', percentage: 25, color: '#333' },
-    { category: 'Photography', percentage: 10, color: '#666' },
-    { category: 'Attire', percentage: 8, color: '#999' },
-    { category: 'Entertainment', percentage: 7, color: '#ccc' },
-    { category: 'Decor', percentage: 5, color: '#ff6347' },
-    { category: 'Miscellaneous', percentage: 5, color: '#eee' }
-  ];
+
+  const t = translations[language];
 
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1 style={styles.title}>Budgeting for Your Dream Wedding</h1>
-        <p style={styles.subtitle}>Creative financial planning for your special day</p>
+        <h1 style={styles.title}>{t.title}</h1>
+        <p style={styles.subtitle}>{t.subtitle}</p>
       </header>
       
       <nav style={styles.nav}>
-        <button 
-          style={{...styles.navButton, ...(activeSection === 0 ? styles.activeNavButton : {})}}
-          onClick={() => setActiveSection(0)}
-        >
-          Financial Architecture
-        </button>
-        <button 
-          style={{...styles.navButton, ...(activeSection === 1 ? styles.activeNavButton : {})}}
-          onClick={() => setActiveSection(1)}
-        >
-          Money Alchemy
-        </button>
-        <button 
-          style={{...styles.navButton, ...(activeSection === 2 ? styles.activeNavButton : {})}}
-          onClick={() => setActiveSection(2)}
-        >
-          Budget Visualization
-        </button>
+        {t.nav.map((navItem, idx) => (
+          <button
+            key={navItem}
+            style={{...styles.navButton, ...(activeSection === idx ? styles.activeNavButton : {})}}
+            onClick={() => setActiveSection(idx)}
+          >
+            {navItem}
+          </button>
+        ))}
       </nav>
       
       <div style={styles.content}>
         {activeSection === 0 && (
           <section style={styles.section}>
-            <h2 style={styles.sectionTitle}>Financial Architecture: Building Your Budget Framework</h2>
+            <h2 style={styles.sectionTitle}>{t.sectionTitles[0]}</h2>
             <div style={styles.cardContainer}>
               <div style={styles.card}>
-                <div style={styles.cardIcon}>🏛️</div>
-                <h3 style={styles.cardTitle}>The Foundation Stones</h3>
-                <p style={styles.cardText}>
-                  Your non-negotiables form the foundation of your wedding budget. Identify what matters most 
-                  to you as a couple—whether it's photography, food, or venue—and allocate resources accordingly.
-                </p>
+                <div style={styles.cardIcon}>{t.cards[0][0].icon}</div>
+                <h3 style={styles.cardTitle}>{t.cards[0][0].title}</h3>
+                <p style={styles.cardText}>{t.cards[0][0].text}</p>
                 <ul style={styles.list}>
-                  <li>Prioritize your top 3 must-haves</li>
-                  <li>Assign percentage values to each category</li>
-                  <li>Build flexibility for unexpected expenses</li>
+                  {t.cards[0][0].list.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </div>
               
               <div style={styles.card}>
-                <div style={styles.cardIcon}>📊</div>
-                <h3 style={styles.cardTitle}>The Pillars of Allocation</h3>
-                <p style={styles.cardText}>
-                  Create structural pillars for your budget that support your vision. Traditional percentage 
-                  allocations provide a starting point, but customize based on your priorities.
-                </p>
+                <div style={styles.cardIcon}>{t.cards[0][1].icon}</div>
+                <h3 style={styles.cardTitle}>{t.cards[0][1].title}</h3>
+                <p style={styles.cardText}>{t.cards[0][1].text}</p>
                 <div style={styles.pillarContainer}>
-                  <div style={styles.pillar}>
-                    <div style={{...styles.pillarFill, height: '70%', backgroundColor: '#ff6347'}}></div>
-                    <span>Venue & Catering (65%)</span>
-                  </div>
-                  <div style={styles.pillar}>
-                    <div style={{...styles.pillarFill, height: '50%', backgroundColor: '#333'}}></div>
-                    <span>Visuals & Memories (20%)</span>
-                  </div>
-                  <div style={styles.pillar}>
-                    <div style={{...styles.pillarFill, height: '30%', backgroundColor: '#666'}}></div>
-                    <span>Attire & Beauty (10%)</span>
-                  </div>
-                  <div style={styles.pillar}>
-                    <div style={{...styles.pillarFill, height: '20%', backgroundColor: '#999'}}></div>
-                    <span>Miscellaneous (5%)</span>
-                  </div>
+                  {t.cards[0][1].pillars.map((pillar, idx) => (
+                    <div style={styles.pillar} key={pillar.label}>
+                      <div style={{...styles.pillarFill, height: pillar.height, backgroundColor: pillar.color}}></div>
+                      <span>{pillar.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -93,50 +316,33 @@ const Blog3 = () => {
         
         {activeSection === 1 && (
           <section style={styles.section}>
-            <h2 style={styles.sectionTitle}>Money Alchemy: Transforming Your Budget Constraints</h2>
+            <h2 style={styles.sectionTitle}>{t.sectionTitles[1]}</h2>
             <div style={styles.cardContainer}>
               <div style={styles.card}>
-                <div style={styles.cardIcon}>⚗️</div>
-                <h3 style={styles.cardTitle}>The Philosopher's Stone</h3>
-                <p style={styles.cardText}>
-                  Learn the art of transforming budgetary limitations into creative opportunities. 
-                  Constraints often breed innovation in wedding planning.
-                </p>
+                <div style={styles.cardIcon}>{t.cards[1][0].icon}</div>
+                <h3 style={styles.cardTitle}>{t.cards[1][0].title}</h3>
+                <p style={styles.cardText}>{t.cards[1][0].text}</p>
                 <div style={styles.tipBox}>
-                  <h4 style={styles.tipTitle}>Creative Solutions:</h4>
+                  <h4 style={styles.tipTitle}>{t.cards[1][0].tipTitle}</h4>
                   <ul style={styles.list}>
-                    <li>Off-peak season discounts (20-30% savings)</li>
-                    <li>Digital invitations vs. traditional printed</li>
-                    <li>Local seasonal flowers instead of imports</li>
-                    <li>DIY decor with personal significance</li>
+                    {t.cards[1][0].tips.map((tip, idx) => (
+                      <li key={idx}>{tip}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
               
               <div style={styles.card}>
-                <div style={styles.cardIcon}>🔍</div>
-                <h3 style={styles.cardTitle}>The Magnifying Glass</h3>
-                <p style={styles.cardText}>
-                  Identify hidden costs that often surprise couples and learn how to anticipate them 
-                  in your budgeting process.
-                </p>
+                <div style={styles.cardIcon}>{t.cards[1][1].icon}</div>
+                <h3 style={styles.cardTitle}>{t.cards[1][1].title}</h3>
+                <p style={styles.cardText}>{t.cards[1][1].text}</p>
                 <div style={styles.hiddenCosts}>
-                  <div style={styles.costItem}>
-                    <span>Postage for invitations</span>
-                    <span>$100-300</span>
-                  </div>
-                  <div style={styles.costItem}>
-                    <span>Marriage license</span>
-                    <span>$50-150</span>
-                  </div>
-                  <div style={styles.costItem}>
-                    <span>Vendor meals</span>
-                    <span>$200-500</span>
-                  </div>
-                  <div style={styles.costItem}>
-                    <span>Overtime fees</span>
-                    <span>$200-800</span>
-                  </div>
+                  {t.cards[1][1].hiddenCosts.map((cost, idx) => (
+                    <div style={styles.costItem} key={cost.label}>
+                      <span>{cost.label}</span>
+                      <span>{cost.value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -145,12 +351,12 @@ const Blog3 = () => {
         
         {activeSection === 2 && (
           <section style={styles.section}>
-            <h2 style={styles.sectionTitle}>Budget Visualization: Seeing Your Financial Landscape</h2>
+            <h2 style={styles.sectionTitle}>{t.sectionTitles[2]}</h2>
             <div style={styles.visualization}>
               <div style={styles.chartContainer}>
-                <h3 style={styles.chartTitle}>Typical Wedding Budget Allocation</h3>
+                <h3 style={styles.chartTitle}>{t.cards[2][0].chartTitle}</h3>
                 <div style={styles.chart}>
-                  {budgetData.map((item, index) => (
+                  {t.cards[2][0].budgetData.map((item, index) => (
                     <div key={index} style={styles.chartItem}>
                       <div style={styles.chartLabel}>
                         <div style={{...styles.colorBox, backgroundColor: item.color}}></div>
@@ -173,19 +379,13 @@ const Blog3 = () => {
               </div>
               
               <div style={styles.savingsTips}>
-                <h3 style={styles.tipsTitle}>Smart Saving Strategies</h3>
-                <div style={styles.tip}>
-                  <h4 style={styles.tipHeader}>The 10% Buffer Rule</h4>
-                  <p>Always keep 10% of your total budget unallocated for unexpected expenses.</p>
-                </div>
-                <div style={styles.tip}>
-                  <h4 style={styles.tipHeader}>The Three-Quotes Rule</h4>
-                  <p>Get at least three quotes for each major vendor to ensure competitive pricing.</p>
-                </div>
-                <div style={styles.tip}>
-                  <h4 style={styles.tipHeader}>The Priority-Based Cutting</h4>
-                  <p>If you need to reduce costs, start with categories lowest on your priority list.</p>
-                </div>
+                <h3 style={styles.tipsTitle}>{t.cards[2][0].tipsTitle}</h3>
+                {t.cards[2][0].tips.map((tip, idx) => (
+                  <div style={styles.tip} key={tip.header}>
+                    <h4 style={styles.tipHeader}>{tip.header}</h4>
+                    <p>{tip.text}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>

@@ -2,13 +2,112 @@ import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
+const translations = {
+  en: {
+    dashboardTitle: "Admin Dashboard",
+    dashboardDesc: "Monitor user activity and website statistics",
+    logout: "Logout",
+    adminInfo: "Admin Information",
+    username: "Username",
+    email: "Email",
+    loginTime: "Login Time",
+    timeSpent: "Time Spent",
+    totalUsers: "Total Users",
+    loading: "Loading user data...",
+    dailyLoginStats: "Daily Login Statistics",
+    totalLogins: "Total Logins",
+    activeUsers: "Active Users",
+    userStatus: "User Status",
+    websiteMetrics: "Website Metrics",
+    totalPageViews: "Total Page Views",
+    activeUsers24h: "Active Users (24h)",
+    registeredUsers: "Registered Users",
+    userLoginHistory: "User Login History",
+    loginHistoryUsername: "Username",
+    loginHistoryEmail: "Email",
+    loginHistoryTime: "Login Time",
+    noLoginData: "No login data available",
+    recentActivity: "Recent Activity",
+    userLoggedIn: 'User "{username}" logged in',
+    noRecentActivity: "No recent activity",
+    active: "Active",
+    inactive: "Inactive"
+  },
+  ar: {
+    dashboardTitle: "لوحة تحكم المسؤول",
+    dashboardDesc: "راقب نشاط المستخدم وإحصائيات الموقع",
+    logout: "تسجيل الخروج",
+    adminInfo: "معلومات المسؤول",
+    username: "اسم المستخدم",
+    email: "البريد الإلكتروني",
+    loginTime: "وقت تسجيل الدخول",
+    timeSpent: "الوقت المستغرق",
+    totalUsers: "إجمالي المستخدمين",
+    loading: "جاري تحميل بيانات المستخدم...",
+    dailyLoginStats: "إحصائيات تسجيل الدخول اليومية",
+    totalLogins: "إجمالي عمليات الدخول",
+    activeUsers: "المستخدمون النشطون",
+    userStatus: "حالة المستخدم",
+    websiteMetrics: "إحصائيات الموقع",
+    totalPageViews: "إجمالي مشاهدات الصفحة",
+    activeUsers24h: "المستخدمون النشطون (24 ساعة)",
+    registeredUsers: "المستخدمون المسجلون",
+    userLoginHistory: "سجل دخول المستخدمين",
+    loginHistoryUsername: "اسم المستخدم",
+    loginHistoryEmail: "البريد الإلكتروني",
+    loginHistoryTime: "وقت الدخول",
+    noLoginData: "لا توجد بيانات دخول",
+    recentActivity: "النشاط الأخير",
+    userLoggedIn: 'المستخدم "{username}" قام بتسجيل الدخول',
+    noRecentActivity: "لا يوجد نشاط حديث",
+    active: "نشط",
+    inactive: "غير نشط"
+  },
+  he: {
+    dashboardTitle: "לוח מנהל מערכת",
+    dashboardDesc: "ניטור פעילות משתמשים וסטטיסטיקות האתר",
+    logout: "התנתקות",
+    adminInfo: "מידע מנהל",
+    username: "שם משתמש",
+    email: "אימייל",
+    loginTime: "זמן כניסה",
+    timeSpent: "זמן באתר",
+    totalUsers: "סה\"כ משתמשים",
+    loading: "טוען נתוני משתמש...",
+    dailyLoginStats: "סטטיסטיקת כניסות יומית",
+    totalLogins: "סה\"כ כניסות",
+    activeUsers: "משתמשים פעילים",
+    userStatus: "סטטוס משתמש",
+    websiteMetrics: "מדדי אתר",
+    totalPageViews: "סה\"כ צפיות בדף",
+    activeUsers24h: "משתמשים פעילים (24ש)",
+    registeredUsers: "משתמשים רשומים",
+    userLoginHistory: "היסטוריית כניסות משתמש",
+    loginHistoryUsername: "שם משתמש",
+    loginHistoryEmail: "אימייל",
+    loginHistoryTime: "זמן כניסה",
+    noLoginData: "אין נתוני כניסה",
+    recentActivity: "פעילות אחרונה",
+    userLoggedIn: 'המשתמש "{username}" נכנס',
+    noRecentActivity: "אין פעילות אחרונה",
+    active: "פעיל",
+    inactive: "לא פעיל"
+  }
+};
+
+const rtlLanguages = ["ar", "he"];
+
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const [language, setLanguage] = useState("en");
+  const t = translations[language];
+  const isRTL = rtlLanguages.includes(language);
+
   const [userData, setUserData] = useState(null);
   const [loginStats, setLoginStats] = useState([]);
   const [activeUsers, setActiveUsers] = useState(0);
   const [pageViews, setPageViews] = useState(0);
   const [userLoginData, setUserLoginData] = useState([]);
-  const navigate = useNavigate();
 
   // Check if user is admin
   useEffect(() => {
@@ -124,8 +223,8 @@ const AdminDashboard = () => {
 
   // Data for the pie chart
   const userStatusData = [
-    { name: 'Active', value: activeUsers },
-    { name: 'Inactive', value: userLoginData.length - activeUsers },
+    { name: t.active, value: activeUsers },
+    { name: t.inactive, value: userLoginData.length - activeUsers },
   ];
 
   const COLORS = ['#ff6347', '#8884d8'];
@@ -137,50 +236,78 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="admin-dashboard">
+    <div
+      className="admin-dashboard"
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
+      {/* Language Dropdown */}
+      <div style={{ marginBottom: 24, textAlign: isRTL ? "right" : "left" }}>
+        <select
+          value={language}
+          onChange={e => setLanguage(e.target.value)}
+          style={{
+            padding: "8px 16px",
+            fontSize: "16px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            background: "#fff",
+            color: "#333",
+            marginBottom: "10px",
+            float: isRTL ? "right" : "left"
+          }}
+        >
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="he">עברית</option>
+        </select>
+      </div>
+
       <header className="dashboard-header">
-        <h1>Admin Dashboard</h1>
-        <p>Monitor user activity and website statistics</p>
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+        <h1>{t.dashboardTitle}</h1>
+        <p>{t.dashboardDesc}</p>
+        <button onClick={handleLogout} className="logout-btn">{t.logout}</button>
       </header>
 
       <div className="dashboard-grid">
         {/* Section 1: User Information */}
         <div className="dashboard-card user-info-card">
           <div className="card-header">
-            <h2>Admin Information</h2>
+            <h2>{t.adminInfo}</h2>
             <span className="card-icon">👤</span>
           </div>
           <div className="card-content">
             {userData ? (
               <>
                 <div className="info-item">
-                  <span className="info-label">Username:</span>
+                  <span className="info-label">{t.username}:</span>
                   <span className="info-value">{userData.email.split('@')[0]}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">Email:</span>
+                  <span className="info-label">{t.email}:</span>
                   <span className="info-value">{userData.email}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">Login Time:</span>
+                  <span className="info-label">{t.loginTime}:</span>
                   <span className="info-value">
                     {new Date(userData.loginTime).toLocaleTimeString()}
                   </span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">Time Spent:</span>
+                  <span className="info-label">{t.timeSpent}:</span>
                   <span className="info-value highlight">{calculateTimeSpent()}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">Total Users:</span>
+                  <span className="info-label">{t.totalUsers}:</span>
                   <span className="info-value">
                     {JSON.parse(localStorage.getItem('users') || '[]').length}
                   </span>
                 </div>
               </>
             ) : (
-              <p>Loading user data...</p>
+              <p>{t.loading}</p>
             )}
           </div>
         </div>
@@ -188,7 +315,7 @@ const AdminDashboard = () => {
         {/* Section 2: Login Statistics Chart */}
         <div className="dashboard-card chart-card">
           <div className="card-header">
-            <h2>Daily Login Statistics</h2>
+            <h2>{t.dailyLoginStats}</h2>
             <span className="card-icon">📊</span>
           </div>
           <div className="card-content">
@@ -199,8 +326,8 @@ const AdminDashboard = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="logins" fill="#ff6347" name="Total Logins" />
-                <Bar dataKey="active" fill="#333" name="Active Users" />
+                <Bar dataKey="logins" fill="#ff6347" name={t.totalLogins} />
+                <Bar dataKey="active" fill="#333" name={t.activeUsers} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -209,7 +336,7 @@ const AdminDashboard = () => {
         {/* Section 3: User Status Pie Chart */}
         <div className="dashboard-card pie-card">
           <div className="card-header">
-            <h2>User Status</h2>
+            <h2>{t.userStatus}</h2>
             <span className="card-icon">👥</span>
           </div>
           <div className="card-content">
@@ -238,25 +365,25 @@ const AdminDashboard = () => {
         {/* Section 4: Page Views and Active Users */}
         <div className="dashboard-card metrics-card">
           <div className="card-header">
-            <h2>Website Metrics</h2>
+            <h2>{t.websiteMetrics}</h2>
             <span className="card-icon">🌐</span>
           </div>
           <div className="card-content">
             <div className="metric">
               <div className="metric-value">{pageViews}</div>
-              <div className="metric-label">Total Page Views</div>
+              <div className="metric-label">{t.totalPageViews}</div>
             </div>
             <div className="metric">
               <div className="metric-value">{activeUsers}</div>
-              <div className="metric-label">Active Users (24h)</div>
+              <div className="metric-label">{t.activeUsers24h}</div>
             </div>
             <div className="metric">
               <div className="metric-value">{userLoginData.length}</div>
-              <div className="metric-label">Total Logins</div>
+              <div className="metric-label">{t.totalLogins}</div>
             </div>
             <div className="metric">
               <div className="metric-value">{JSON.parse(localStorage.getItem('users') || '[]').length}</div>
-              <div className="metric-label">Registered Users</div>
+              <div className="metric-label">{t.registeredUsers}</div>
             </div>
           </div>
         </div>
@@ -264,7 +391,7 @@ const AdminDashboard = () => {
         {/* Section 5: User Login History Table */}
         <div className="dashboard-card table-card">
           <div className="card-header">
-            <h2>User Login History</h2>
+            <h2>{t.userLoginHistory}</h2>
             <span className="card-icon">📋</span>
           </div>
           <div className="card-content">
@@ -272,9 +399,9 @@ const AdminDashboard = () => {
               <table className="user-table">
                 <thead>
                   <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Login Time</th>
+                    <th>{t.loginHistoryUsername}</th>
+                    <th>{t.loginHistoryEmail}</th>
+                    <th>{t.loginHistoryTime}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -288,7 +415,7 @@ const AdminDashboard = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="3" style={{textAlign: 'center'}}>No login data available</td>
+                      <td colSpan="3" style={{textAlign: 'center'}}>{t.noLoginData}</td>
                     </tr>
                   )}
                 </tbody>
@@ -300,7 +427,7 @@ const AdminDashboard = () => {
         {/* Section 6: Recent Activity */}
         <div className="dashboard-card activity-card">
           <div className="card-header">
-            <h2>Recent Activity</h2>
+            <h2>{t.recentActivity}</h2>
             <span className="card-icon">📝</span>
           </div>
           <div className="card-content">
@@ -310,12 +437,14 @@ const AdminDashboard = () => {
                   <span className="activity-time">
                     {new Date(user.loginTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                   </span>
-                  <span className="activity-text">User "{user.username}" logged in</span>
+                  <span className="activity-text">
+                    {t.userLoggedIn.replace("{username}", user.username)}
+                  </span>
                 </li>
               ))}
               {userLoginData.length === 0 && (
                 <li className="activity-item">
-                  <span className="activity-text">No recent activity</span>
+                  <span className="activity-text">{t.noRecentActivity}</span>
                 </li>
               )}
             </ul>

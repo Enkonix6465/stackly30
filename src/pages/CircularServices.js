@@ -1,18 +1,59 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './CircularServices.css';
+import { useLanguage } from '../context/LanguageContext';
 
-const services = [
-  { name: 'Event Stage Set-ups', },
-  { name: 'Event Printing and Designing',  },
-  { name: 'Event Lights Set-up',  },
-  { name: 'Event Sound Set-up',  },
-  { name: 'Event Entertainment',  },
-  { name: 'Event AV Set-up',  },
-];
+const translations = {
+  en: {
+    subHeading: "WE PLAN AND DELIVER",
+    mainHeading: "EVENT SERVICES",
+    tagline: "to meet your expectations",
+    description: "Our process of understanding your objectives and building the event step by step from there helps us provide for any requirement you may have. Our end-to-end event services portfolio is updated constantly to match global standards and deliver fresh and engaging experiences for clients and attendees alike.",
+    centerText: "Pegasus Events",
+    services: [
+      "Event Stage Set-ups",
+      "Event Printing and Designing",
+      "Event Lights Set-up",
+      "Event Sound Set-up",
+      "Event Entertainment",
+      "Event AV Set-up"
+    ]
+  },
+  ar: {
+    subHeading: "نخطط وننفذ",
+    mainHeading: "خدمات الفعاليات",
+    tagline: "لتلبية توقعاتك",
+    description: "نحن نفهم أهدافك ونبني الحدث خطوة بخطوة لتلبية أي متطلبات لديك. يتم تحديث مجموعة خدمات الفعاليات لدينا باستمرار لتواكب المعايير العالمية وتقدم تجارب جديدة وجذابة للعملاء والحضور.",
+    centerText: "فعاليات بيغاسوس",
+    services: [
+      "تجهيز منصات الفعاليات",
+      "الطباعة والتصميم للفعاليات",
+      "تجهيز إضاءة الفعاليات",
+      "تجهيز الصوت للفعاليات",
+      "الترفيه في الفعاليات",
+      "تجهيز AV للفعاليات"
+    ]
+  },
+  he: {
+    subHeading: "אנחנו מתכננים ומבצעים",
+    mainHeading: "שירותי אירועים",
+    tagline: "כדי לעמוד בציפיות שלך",
+    description: "התהליך שלנו מתחיל בהבנת המטרות שלך ובניית האירוע שלב אחר שלב, כדי לספק כל צורך שלך. תיק השירותים שלנו מתעדכן כל הזמן בהתאם לסטנדרטים עולמיים ומספק חוויות חדשות ומרתקות ללקוחות ולמשתתפים.",
+    centerText: "פגאסוס אירועים",
+    services: [
+      "הקמת במות לאירועים",
+      "הדפסה ועיצוב לאירועים",
+      "התקנת תאורה לאירועים",
+      "התקנת סאונד לאירועים",
+      "בידור לאירועים",
+      "התקנת AV לאירועים"
+    ]
+  }
+};
 
 function CircularServices() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,31 +76,30 @@ function CircularServices() {
     };
   }, []);
 
+  const t = translations[language];
+
   return (
     <section ref={sectionRef} className="circular-services-section">
       <div className="circular-services-container">
         {/* Left-side content */}
         <div className="circular-services-content-wrapper">
           <div className="section-header-line"></div>
-          <p className="section-sub-heading">WE PLAN AND DELIVER</p>
-          <h2 className="section-main-heading">EVENT SERVICES</h2>
-          <p className="section-tagline">to meet your expectations</p>
+          <p className="section-sub-heading">{t.subHeading}</p>
+          <h2 className="section-main-heading">{t.mainHeading}</h2>
+          <p className="section-tagline">{t.tagline}</p>
           <div className="content-break"></div>
           <p className="section-description-circle">
-            Our process of understanding your objectives and building the event step by step
-            from there helps us provide for any requirement you may have.
-            Our end-to-end event services portfolio is updated constantly to match global standards and deliver
-            fresh and engaging experiences for clients and attendees alike.
+            {t.description}
           </p>
         </div>
         
         {/* Right-side circular layout */}
         <div className={`circular-layout-wrapper ${isVisible ? 'animate' : ''}`}>
           <div className="center-circle">
-            <p className="center-text">Pegasus Events</p>
+            <p className="center-text">{t.centerText}</p>
           </div>
-          {services.map((service, index) => {
-            const numServices = services.length;
+          {t.services.map((service, index) => {
+            const numServices = t.services.length;
             const angle = (index / numServices) * 360;
             return (
               <div
@@ -70,8 +110,7 @@ function CircularServices() {
                   '--delay': `${index * 0.15}s`,
                 }}
               >
-                
-                <p>{service.name}</p>
+                <p>{service}</p>
               </div>
             );
           })}

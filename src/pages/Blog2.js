@@ -1,13 +1,166 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const translations = {
+  en: {
+    title: "Finding Your Perfect Event Space",
+    subtitle: "Creative approaches to venue selection that go beyond the basics",
+    tabs: ["The Vibe Assessment", "Spatial Alchemy"],
+    vibeTitle: "The Vibe Assessment: Reading a Space's Energy",
+    vibeCards: [
+      {
+        icon: "🔊",
+        title: "Acoustic Personality",
+        text: "Every venue has its own sound signature. Visit at a similar time to your event and listen. Is there ambient noise? How do sounds carry? The acoustics can make or break your gathering."
+      },
+      {
+        icon: "💡",
+        title: "Lighting Language",
+        text: "Notice how light interacts with the space throughout the day. Does natural light create interesting patterns? How does artificial lighting affect the mood? The right lighting tells your story without words."
+      },
+      {
+        icon: "👣",
+        title: "Flow Footprint",
+        text: "Trace the natural pathways people will take. Where do doors and architecture naturally guide guests? The unconscious flow of movement through a space significantly impacts guest experience."
+      }
+    ],
+    alchemyTitle: "Spatial Alchemy: Transforming Venues Through Design Thinking",
+    alchemyCards: [
+      {
+        icon: "🔄",
+        title: "Modular Mindset",
+        text: "Look beyond the current layout. How can movable elements or temporary structures create the experience you want? The best venues are clay, not marble - ready to be shaped for your vision."
+      },
+      {
+        icon: "🌐",
+        title: "Context Weaving",
+        text: "How does the venue connect to its surroundings? Can you incorporate local art, culture, or landscape? A space that dialogues with its environment creates a richer, more authentic experience."
+      },
+      {
+        icon: "🎭",
+        title: "Multi-Dimensional Experience",
+        text: "Plan for different engagement zones within the same venue. Create areas for interaction, reflection, and observation. Like a good story, your event should have rhythm and variety in its spatial narrative."
+      }
+    ],
+    spectrumTitle: "Venue Atmosphere Spectrum",
+    spectrum: [
+      { color: "#f0f0f0", label: "Minimalist" },
+      { color: "#d0d0d0", label: "Industrial" },
+      { color: "#ff6347", label: "Warm", opacity: 0.7 },
+      { color: "#333", label: "Intimate" },
+      { color: "#a0a0a0", label: "Adaptable" }
+    ]
+  },
+  ar: {
+    title: "إيجاد مساحة الحدث المثالية",
+    subtitle: "طرق مبتكرة لاختيار المكان تتجاوز الأساسيات",
+    tabs: ["تقييم الأجواء", "كيمياء المكان"],
+    vibeTitle: "تقييم الأجواء: قراءة طاقة المكان",
+    vibeCards: [
+      {
+        icon: "🔊",
+        title: "الشخصية الصوتية",
+        text: "لكل مكان توقيع صوتي خاص به. زر المكان في وقت مشابه لحدثك واستمع. هل هناك ضوضاء؟ كيف تنتقل الأصوات؟ الصوتيات يمكن أن تصنع أو تفسد الحدث."
+      },
+      {
+        icon: "💡",
+        title: "لغة الإضاءة",
+        text: "لاحظ كيف يتفاعل الضوء مع المكان طوال اليوم. هل يخلق الضوء الطبيعي أنماطًا مثيرة؟ كيف تؤثر الإضاءة الصناعية على المزاج؟ الإضاءة المناسبة تروي قصتك دون كلمات."
+      },
+      {
+        icon: "👣",
+        title: "بصمة التدفق",
+        text: "تتبع المسارات الطبيعية التي سيسلكها الناس. أين توجه الأبواب والهندسة المعمارية الضيوف؟ تدفق الحركة غير الواعي يؤثر بشكل كبير على تجربة الضيوف."
+      }
+    ],
+    alchemyTitle: "كيمياء المكان: تحويل الأماكن عبر التفكير التصميمي",
+    alchemyCards: [
+      {
+        icon: "🔄",
+        title: "عقلية التشكيل",
+        text: "انظر إلى ما وراء التخطيط الحالي. كيف يمكن للعناصر المتحركة أو الهياكل المؤقتة أن تخلق التجربة التي تريدها؟ أفضل الأماكن قابلة للتشكيل لرؤيتك."
+      },
+      {
+        icon: "🌐",
+        title: "نسج السياق",
+        text: "كيف يرتبط المكان بمحيطه؟ هل يمكنك دمج الفن أو الثقافة أو المناظر المحلية؟ المكان الذي يتفاعل مع بيئته يخلق تجربة أكثر ثراءً وأصالة."
+      },
+      {
+        icon: "🎭",
+        title: "تجربة متعددة الأبعاد",
+        text: "خطط لمناطق تفاعل مختلفة داخل نفس المكان. أنشئ مناطق للتفاعل والتأمل والملاحظة. مثل القصة الجيدة، يجب أن يكون للحدث إيقاع وتنوع في السرد المكاني."
+      }
+    ],
+    spectrumTitle: "طيف أجواء المكان",
+    spectrum: [
+      { color: "#f0f0f0", label: "بسيط" },
+      { color: "#d0d0d0", label: "صناعي" },
+      { color: "#ff6347", label: "دافئ", opacity: 0.7 },
+      { color: "#333", label: "حميمي" },
+      { color: "#a0a0a0", label: "قابل للتكيف" }
+    ]
+  },
+  he: {
+    title: "מציאת חלל האירוע המושלם",
+    subtitle: "גישות יצירתיות לבחירת מקום שמעבר לבסיס",
+    tabs: ["הערכת האווירה", "אלכימיית המרחב"],
+    vibeTitle: "הערכת האווירה: קריאת האנרגיה של המקום",
+    vibeCards: [
+      {
+        icon: "🔊",
+        title: "אישיות אקוסטית",
+        text: "לכל מקום יש חתימת קול משלו. בקר בזמן דומה לאירוע שלך והקשב. האם יש רעש רקע? איך הקולות נעים? האקוסטיקה יכולה להרים או להפיל את האירוע."
+      },
+      {
+        icon: "💡",
+        title: "שפת התאורה",
+        text: "שימו לב איך האור משתנה במרחב לאורך היום. האם האור הטבעי יוצר דפוסים מעניינים? איך התאורה המלאכותית משפיעה על האווירה? תאורה נכונה מספרת סיפור בלי מילים."
+      },
+      {
+        icon: "👣",
+        title: "טביעת זרימה",
+        text: "עקוב אחרי המסלולים הטבעיים שאנשים ילכו בהם. לאן דלתות והאדריכלות מכוונות את האורחים? זרימת התנועה הלא מודעת משפיעה מאוד על חוויית האורח."
+      }
+    ],
+    alchemyTitle: "אלכימיית המרחב: עיצוב מקומות דרך חשיבה יצירתית",
+    alchemyCards: [
+      {
+        icon: "🔄",
+        title: "חשיבה מודולרית",
+        text: "הסתכל מעבר לפריסה הנוכחית. איך אלמנטים ניידים או מבנים זמניים יכולים ליצור את החוויה שאתה רוצה? המקומות הטובים ביותר הם חומר גלם לעיצוב החזון שלך."
+      },
+      {
+        icon: "🌐",
+        title: "שזירת הקשר",
+        text: "איך המקום מתחבר לסביבה שלו? האם אפשר לשלב אמנות, תרבות או נוף מקומי? מקום שמדבר עם סביבתו יוצר חוויה עשירה ואותנטית."
+      },
+      {
+        icon: "🎭",
+        title: "חוויה רב-ממדית",
+        text: "תכנן אזורי מעורבות שונים באותו מקום. צור אזורים לאינטראקציה, להרהור ולתצפית. כמו סיפור טוב, לאירוע צריך להיות קצב וגיוון בנרטיב המרחבי."
+      }
+    ],
+    spectrumTitle: "ספקטרום אווירת המקום",
+    spectrum: [
+      { color: "#f0f0f0", label: "מינימליסטי" },
+      { color: "#d0d0d0", label: "תעשייתי" },
+      { color: "#ff6347", label: "חמים", opacity: 0.7 },
+      { color: "#333", label: "אינטימי" },
+      { color: "#a0a0a0", label: "גמיש" }
+    ]
+  }
+};
 
 const Blog2 = () => {
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState(0);
-  
+  const t = translations[language];
+
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1 style={styles.title}>Finding Your Perfect Event Space</h1>
-        <p style={styles.subtitle}>Creative approaches to venue selection that go beyond the basics</p>
+        <h1 style={styles.title}>{t.title}</h1>
+        <p style={styles.subtitle}>{t.subtitle}</p>
       </header>
       
       <div style={styles.tabContainer}>
@@ -15,112 +168,59 @@ const Blog2 = () => {
           style={{...styles.tab, ...(activeTab === 0 ? styles.activeTab : {})}} 
           onClick={() => setActiveTab(0)}
         >
-          The Vibe Assessment
+          {t.tabs[0]}
         </button>
         <button 
           style={{...styles.tab, ...(activeTab === 1 ? styles.activeTab : {})}} 
           onClick={() => setActiveTab(1)}
         >
-          Spatial Alchemy
+          {t.tabs[1]}
         </button>
       </div>
       
       <div style={styles.content}>
         {activeTab === 0 ? (
           <div style={styles.section}>
-            <h2 style={styles.sectionTitle}>The Vibe Assessment: Reading a Space's Energy</h2>
+            <h2 style={styles.sectionTitle}>{t.vibeTitle}</h2>
             <div style={styles.cardContainer}>
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>🔊</div>
-                <h3 style={styles.cardTitle}>Acoustic Personality</h3>
-                <p style={styles.cardText}>
-                  Every venue has its own sound signature. Visit at a similar time to your event and listen. 
-                  Is there ambient noise? How do sounds carry? The acoustics can make or break your gathering.
-                </p>
-              </div>
-              
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>💡</div>
-                <h3 style={styles.cardTitle}>Lighting Language</h3>
-                <p style={styles.cardText}>
-                  Notice how light interacts with the space throughout the day. Does natural light create 
-                  interesting patterns? How does artificial lighting affect the mood? The right lighting 
-                  tells your story without words.
-                </p>
-              </div>
-              
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>👣</div>
-                <h3 style={styles.cardTitle}>Flow Footprint</h3>
-                <p style={styles.cardText}>
-                  Trace the natural pathways people will take. Where do doors and architecture naturally 
-                  guide guests? The unconscious flow of movement through a space significantly impacts 
-                  guest experience.
-                </p>
-              </div>
+              {t.vibeCards.map((card, idx) => (
+                <div style={styles.card} key={idx}>
+                  <div style={styles.cardIcon}>{card.icon}</div>
+                  <h3 style={styles.cardTitle}>{card.title}</h3>
+                  <p style={styles.cardText}>{card.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         ) : (
           <div style={styles.section}>
-            <h2 style={styles.sectionTitle}>Spatial Alchemy: Transforming Venues Through Design Thinking</h2>
+            <h2 style={styles.sectionTitle}>{t.alchemyTitle}</h2>
             <div style={styles.cardContainer}>
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>🔄</div>
-                <h3 style={styles.cardTitle}>Modular Mindset</h3>
-                <p style={styles.cardText}>
-                  Look beyond the current layout. How can movable elements or temporary structures 
-                  create the experience you want? The best venues are clay, not marble - ready to be 
-                  shaped for your vision.
-                </p>
-              </div>
-              
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>🌐</div>
-                <h3 style={styles.cardTitle}>Context Weaving</h3>
-                <p style={styles.cardText}>
-                  How does the venue connect to its surroundings? Can you incorporate local art, 
-                  culture, or landscape? A space that dialogues with its environment creates a 
-                  richer, more authentic experience.
-                </p>
-              </div>
-              
-              <div style={styles.card}>
-                <div style={styles.cardIcon}>🎭</div>
-                <h3 style={styles.cardTitle}>Multi-Dimensional Experience</h3>
-                <p style={styles.cardText}>
-                  Plan for different engagement zones within the same venue. Create areas for 
-                  interaction, reflection, and observation. Like a good story, your event should 
-                  have rhythm and variety in its spatial narrative.
-                </p>
-              </div>
+              {t.alchemyCards.map((card, idx) => (
+                <div style={styles.card} key={idx}>
+                  <div style={styles.cardIcon}>{card.icon}</div>
+                  <h3 style={styles.cardTitle}>{card.title}</h3>
+                  <p style={styles.cardText}>{card.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         )}
       </div>
       
       <div style={styles.visualizer}>
-        <h3 style={styles.visualizerTitle}>Venue Atmosphere Spectrum</h3>
+        <h3 style={styles.visualizerTitle}>{t.spectrumTitle}</h3>
         <div style={styles.spectrum}>
-          <div style={styles.spectrumItem}>
-            <div style={{...styles.spectrumBox, backgroundColor: '#f0f0f0'}}></div>
-            <span>Minimalist</span>
-          </div>
-          <div style={styles.spectrumItem}>
-            <div style={{...styles.spectrumBox, backgroundColor: '#d0d0d0'}}></div>
-            <span>Industrial</span>
-          </div>
-          <div style={styles.spectrumItem}>
-            <div style={{...styles.spectrumBox, backgroundColor: '#ff6347', opacity: 0.7}}></div>
-            <span>Warm</span>
-          </div>
-          <div style={styles.spectrumItem}>
-            <div style={{...styles.spectrumBox, backgroundColor: '#333'}}></div>
-            <span>Intimate</span>
-          </div>
-          <div style={styles.spectrumItem}>
-            <div style={{...styles.spectrumBox, backgroundColor: '#a0a0a0'}}></div>
-            <span>Adaptable</span>
-          </div>
+          {t.spectrum.map((item, idx) => (
+            <div style={styles.spectrumItem} key={idx}>
+              <div style={{
+                ...styles.spectrumBox,
+                backgroundColor: item.color,
+                opacity: item.opacity || 1
+              }}></div>
+              <span>{item.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

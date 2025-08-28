@@ -10,6 +10,7 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { DarkModeProvider, useDarkMode } from "./context/Darkmodecontext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // Pages
 import Welcome from "./pages/Welcome";
@@ -99,9 +100,11 @@ const AppLayout = () => {
 function App() {
   return (
     <DarkModeProvider>
-      <Router>
-        <AppLayout />
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <AppLayout />
+        </Router>
+      </LanguageProvider>
     </DarkModeProvider>
   );
 }

@@ -1,8 +1,86 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const translations = {
+  en: {
+    welcome: "Welcome to",
+    stackly: "STACKLY",
+    welcomeBack: "Welcome back, Please login into an account",
+    email: "Your Username",
+    password: "Enter Password",
+    forgot: "Forgot password?",
+    login: "Login",
+    dontHave: "Don't have an account? Sign Up",
+    firstName: "First Name",
+    lastName: "Last Name",
+    signUp: "Sign Up",
+    alreadyHave: "Already have an account? Login",
+    resetPassword: "Reset Password",
+    resetEmail: "Enter your registered email",
+    sendReset: "Send Reset Link",
+    backToLogin: "Back to Login",
+    invalid: "Invalid email or password.",
+    exists: "User already exists with this email.",
+    signupSuccess: "Signup successful! Please login.",
+    noUser: "No user found with this email.",
+    resetSent: "User found. Please check your email for password reset instructions. (Simulation)"
+  },
+  ar: {
+    welcome: "مرحبًا في",
+    stackly: "STACKLY",
+    welcomeBack: "مرحبًا بعودتك، يرجى تسجيل الدخول إلى حسابك",
+    email: "اسم المستخدم",
+    password: "أدخل كلمة المرور",
+    forgot: "نسيت كلمة المرور؟",
+    login: "تسجيل الدخول",
+    dontHave: "ليس لديك حساب؟ سجل الآن",
+    firstName: "الاسم الأول",
+    lastName: "اسم العائلة",
+    signUp: "سجل الآن",
+    alreadyHave: "لديك حساب بالفعل؟ تسجيل الدخول",
+    resetPassword: "إعادة تعيين كلمة المرور",
+    resetEmail: "أدخل بريدك الإلكتروني المسجل",
+    sendReset: "إرسال رابط إعادة التعيين",
+    backToLogin: "العودة لتسجيل الدخول",
+    invalid: "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    exists: "يوجد مستخدم بهذا البريد الإلكتروني.",
+    signupSuccess: "تم التسجيل بنجاح! يرجى تسجيل الدخول.",
+    noUser: "لا يوجد مستخدم بهذا البريد الإلكتروني.",
+    resetSent: "تم العثور على المستخدم. يرجى مراجعة بريدك الإلكتروني لإعادة تعيين كلمة المرور. (محاكاة)"
+  },
+  he: {
+    welcome: "ברוכים הבאים ל",
+    stackly: "STACKLY",
+    welcomeBack: "ברוך שובך, אנא התחבר לחשבון שלך",
+    email: "שם משתמש",
+    password: "הזן סיסמה",
+    forgot: "שכחת סיסמה?",
+    login: "התחברות",
+    dontHave: "אין לך חשבון? הרשמה",
+    firstName: "שם פרטי",
+    lastName: "שם משפחה",
+    signUp: "הרשמה",
+    alreadyHave: "כבר יש לך חשבון? התחברות",
+    resetPassword: "איפוס סיסמה",
+    resetEmail: "הזן את האימייל הרשום שלך",
+    sendReset: "שלח קישור לאיפוס",
+    backToLogin: "חזרה להתחברות",
+    invalid: "אימייל או סיסמה לא נכונים.",
+    exists: "משתמש כבר קיים עם אימייל זה.",
+    signupSuccess: "ההרשמה הצליחה! אנא התחבר.",
+    noUser: "לא נמצא משתמש עם אימייל זה.",
+    resetSent: "משתמש נמצא. בדוק את האימייל שלך להוראות איפוס. (סימולציה)"
+  }
+};
+
+const rtlLanguages = ["ar", "he"];
+
 const Welcome = () => {
   const navigate = useNavigate();
+
+  const [language, setLanguage] = useState("en");
+  const t = translations[language];
+  const isRTL = rtlLanguages.includes(language);
 
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signUpData, setSignUpData] = useState({
@@ -47,7 +125,7 @@ const Welcome = () => {
       localStorage.setItem("userLogins", JSON.stringify(logins));
       navigate("/home");
     } else {
-      setError("Invalid email or password.");
+      setError(t.invalid);
     }
   };
 
@@ -60,14 +138,14 @@ const Welcome = () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     if (users.find((user) => user.email === signUpData.email)) {
-      setError("User already exists with this email.");
+      setError(t.exists);
       return;
     }
 
     users.push(signUpData);
     localStorage.setItem("users", JSON.stringify(users));
     setError("");
-    alert("Signup successful! Please login.");
+    alert(t.signupSuccess);
     setSignUpData({ firstName: "", lastName: "", email: "", password: "" });
     setIsLogin(true);
   };
@@ -83,202 +161,193 @@ const Welcome = () => {
     const user = users.find((user) => user.email === forgotEmail);
 
     if (!user) {
-      setError("No user found with this email.");
+      setError(t.noUser);
       setResetMessage("");
     } else {
       setError("");
-      setResetMessage(
-        "User found. Please check your email for password reset instructions. (Simulation)"
-      );
+      setResetMessage(t.resetSent);
     }
   };
 
   return (
-    <>
-      {/* Mobile responsiveness */}
-      <style>{`
-        @media (max-width: 768px) {
-          div[style*="display: flex"][style*="min-height: 100vh"] {
-            flex-direction: column !important;
-          }
-          div[style*="flex: 1"]:nth-child(1),
-          div[style*="flex: 1"]:nth-child(2) {
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 20px !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-          }
-          h1, h2 {
-            font-size: 24px !important;
-            text-align: center;
-          }
-          input {
-            font-size: 14px !important;
-            padding: 10px 12px !important;
-          }
-          button {
-            font-size: 14px !important;
-            padding: 10px !important;
-          }
-          p[style*="cursor: pointer"] {
-            font-size: 14px !important;
-            text-align: center !important;
-          }
-        }
-      `}</style>
+    <div
+      style={{
+        ...styles.pageContainer,
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left",
+      }}
+    >
+      <div style={styles.leftSide}>
+        <img
+          src="images/login.jpg"
+          alt="Login Illustration"
+          style={styles.image}
+        />
+      </div>
 
-      <div style={styles.pageContainer}>
-        <div style={styles.leftSide}>
-          <img
-            src="images/login.jpg"
-            alt="Login Illustration"
-            style={styles.image}
-          />
+      <div style={styles.rightSide}>
+        {/* Language Dropdown */}
+        <div style={{ marginBottom: 24, textAlign: isRTL ? "right" : "left" }}>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            style={{
+              padding: "8px 16px",
+              fontSize: "16px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+              background: "#fff",
+              color: "#333",
+              marginBottom: "10px",
+              float: isRTL ? "right" : "left"
+            }}
+          >
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="he">עברית</option>
+          </select>
         </div>
 
-        <div style={styles.rightSide}>
-          {!isForgotPassword ? (
-            <>
-              <h1 style={styles.welcomeHeading}>
-                Welcome to <span style={styles.highlight}>STACKLY</span>
-              </h1>
-              <p style={styles.welcomeSubtext}>
-                Welcome back, Please login into an account
-              </p>
+        {!isForgotPassword ? (
+          <>
+            <h1 style={styles.welcomeHeading}>
+              {t.welcome} <span style={styles.highlight}>{t.stackly}</span>
+            </h1>
+            <p style={styles.welcomeSubtext}>
+              {t.welcomeBack}
+            </p>
 
-              {isLogin ? (
-                <form onSubmit={handleLoginSubmit} style={styles.form}>
-                  <input
-                    style={styles.input}
-                    type="email"
-                    name="email"
-                    placeholder="Your Username"
-                    value={loginData.email}
-                    onChange={handleLoginChange}
-                    required
-                  />
-                  <input
-                    style={styles.input}
-                    type="password"
-                    name="password"
-                    placeholder="Enter Password"
-                    value={loginData.password}
-                    onChange={handleLoginChange}
-                    required
-                  />
-                  <p
-                    style={styles.forgotPassword}
-                    onClick={() => {
-                      setError("");
-                      setIsForgotPassword(true);
-                      setResetMessage("");
-                    }}
-                  >
-                    Forgot password?
-                  </p>
-                  <button type="submit" style={styles.loginButton}>
-                    <span role="img" aria-label="user-lock" style={{ marginRight: 8 }}>👤🔒</span> Login
-                  </button>
-                  <p
-                    style={styles.toggle}
-                    onClick={() => {
-                      setError("");
-                      setIsLogin(false);
-                    }}
-                  >
-                    Don't have an account? Sign Up
-                  </p>
-                </form>
-              ) : (
-                <form onSubmit={handleSignUpSubmit} style={styles.form}>
-                  <input
-                    style={styles.input}
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={signUpData.firstName}
-                    onChange={handleSignUpChange}
-                    required
-                  />
-                  <input
-                    style={styles.input}
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={signUpData.lastName}
-                    onChange={handleSignUpChange}
-                    required
-                  />
-                  <input
-                    style={styles.input}
-                    type="email"
-                    name="email"
-                    placeholder="Your Username"
-                    value={signUpData.email}
-                    onChange={handleSignUpChange}
-                    required
-                  />
-                  <input
-                    style={styles.input}
-                    type="password"
-                    name="password"
-                    placeholder="Enter Password"
-                    value={signUpData.password}
-                    onChange={handleSignUpChange}
-                    required
-                  />
-                  <button type="submit" style={styles.loginButton}>
-                    Sign Up
-                  </button>
-                  <p
-                    style={styles.toggle}
-                    onClick={() => {
-                      setError("");
-                      setIsLogin(true);
-                    }}
-                  >
-                    Already have an account? Login
-                  </p>
-                </form>
-              )}
-
-              {error && <p style={styles.errorMsg}>{error}</p>}
-              {resetMessage && <p style={{ color: "#ff6347", marginTop: 10 }}>{resetMessage}</p>}
-            </>
-          ) : (
-            <>
-              <h2 style={styles.welcomeHeading}>Reset Password</h2>
-              <form onSubmit={handleForgotPasswordSubmit} style={styles.form}>
+            {isLogin ? (
+              <form onSubmit={handleLoginSubmit} style={styles.form}>
                 <input
                   style={styles.input}
                   type="email"
-                  placeholder="Enter your registered email"
-                  value={forgotEmail}
-                  onChange={handleForgotPasswordChange}
+                  name="email"
+                  placeholder={t.email}
+                  value={loginData.email}
+                  onChange={handleLoginChange}
                   required
                 />
+                <input
+                  style={styles.input}
+                  type="password"
+                  name="password"
+                  placeholder={t.password}
+                  value={loginData.password}
+                  onChange={handleLoginChange}
+                  required
+                />
+                <p
+                  style={styles.forgotPassword}
+                  onClick={() => {
+                    setError("");
+                    setIsForgotPassword(true);
+                    setResetMessage("");
+                  }}
+                >
+                  {t.forgot}
+                </p>
                 <button type="submit" style={styles.loginButton}>
-                  Send Reset Link
+                  <span role="img" aria-label="user-lock" style={{ marginRight: 8 }}>👤🔒</span> {t.login}
                 </button>
                 <p
                   style={styles.toggle}
                   onClick={() => {
                     setError("");
-                    setResetMessage("");
-                    setIsForgotPassword(false);
+                    setIsLogin(false);
                   }}
                 >
-                  Back to Login
+                  {t.dontHave}
                 </p>
               </form>
-              {error && <p style={styles.errorMsg}>{error}</p>}
-              {resetMessage && <p style={{ color: "#ff6347", marginTop: 10 }}>{resetMessage}</p>}
-            </>
-          )}
-        </div>
+            ) : (
+              <form onSubmit={handleSignUpSubmit} style={styles.form}>
+                <input
+                  style={styles.input}
+                  type="text"
+                  name="firstName"
+                  placeholder={t.firstName}
+                  value={signUpData.firstName}
+                  onChange={handleSignUpChange}
+                  required
+                />
+                <input
+                  style={styles.input}
+                  type="text"
+                  name="lastName"
+                  placeholder={t.lastName}
+                  value={signUpData.lastName}
+                  onChange={handleSignUpChange}
+                  required
+                />
+                <input
+                  style={styles.input}
+                  type="email"
+                  name="email"
+                  placeholder={t.email}
+                  value={signUpData.email}
+                  onChange={handleSignUpChange}
+                  required
+                />
+                <input
+                  style={styles.input}
+                  type="password"
+                  name="password"
+                  placeholder={t.password}
+                  value={signUpData.password}
+                  onChange={handleSignUpChange}
+                  required
+                />
+                <button type="submit" style={styles.loginButton}>
+                  {t.signUp}
+                </button>
+                <p
+                  style={styles.toggle}
+                  onClick={() => {
+                    setError("");
+                    setIsLogin(true);
+                  }}
+                >
+                  {t.alreadyHave}
+                </p>
+              </form>
+            )}
+
+            {error && <p style={styles.errorMsg}>{error}</p>}
+            {resetMessage && <p style={{ color: "#ff6347", marginTop: 10 }}>{resetMessage}</p>}
+          </>
+        ) : (
+          <>
+            <h2 style={styles.welcomeHeading}>{t.resetPassword}</h2>
+            <form onSubmit={handleForgotPasswordSubmit} style={styles.form}>
+              <input
+                style={styles.input}
+                type="email"
+                placeholder={t.resetEmail}
+                value={forgotEmail}
+                onChange={handleForgotPasswordChange}
+                required
+              />
+              <button type="submit" style={styles.loginButton}>
+                {t.sendReset}
+              </button>
+              <p
+                style={styles.toggle}
+                onClick={() => {
+                  setError("");
+                  setResetMessage("");
+                  setIsForgotPassword(false);
+                }}
+              >
+                {t.backToLogin}
+              </p>
+            </form>
+            {error && <p style={styles.errorMsg}>{error}</p>}
+            {resetMessage && <p style={{ color: "#ff6347", marginTop: 10 }}>{resetMessage}</p>}
+          </>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -287,7 +356,7 @@ const styles = {
     display: "flex",
     minHeight: "100vh",
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#000", // Changed to black
+    backgroundColor: "#000",
   },
   leftSide: {
     flex: 1,
@@ -295,7 +364,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: "40px",
-    backgroundColor: "#000", // Added black background
+    backgroundColor: "#000",
   },
   image: {
     maxWidth: "100%",
@@ -304,7 +373,7 @@ const styles = {
   },
   rightSide: {
     flex: 1,
-    backgroundColor: "#fff", // White background
+    backgroundColor: "#fff",
     borderRadius: "10px",
     margin: "40px",
     padding: "40px",
@@ -317,14 +386,14 @@ const styles = {
     fontSize: "28px",
     fontWeight: "bold",
     marginBottom: "10px",
-    color: "#000", // Black text
+    color: "#000",
   },
   highlight: {
-    color: "#ff6347", // Tomato red
+    color: "#ff6347",
   },
   welcomeSubtext: {
     marginBottom: "30px",
-    color: "#666", // Dark gray
+    color: "#666",
   },
   form: {
     display: "flex",
@@ -338,12 +407,12 @@ const styles = {
     borderRadius: "5px",
     outline: "none",
     transition: "border-color 0.3s",
-    backgroundColor: "#fff", // White background
-    color: "#000", // Black text
+    backgroundColor: "#fff",
+    color: "#000",
   },
   loginButton: {
-    backgroundColor: "#ff6347", // Tomato red
-    color: "#fff", // White text
+    backgroundColor: "#ff6347",
+    color: "#fff",
     fontWeight: "bold",
     border: "none",
     padding: "12px",
@@ -354,7 +423,7 @@ const styles = {
   },
   forgotPassword: {
     textAlign: "right",
-    color: "#ff6347", // Tomato red
+    color: "#ff6347",
     cursor: "pointer",
     fontSize: "14px",
     marginTop: "-10px",
@@ -362,14 +431,14 @@ const styles = {
   },
   toggle: {
     cursor: "pointer",
-    color: "#ff6347", // Tomato red
+    color: "#ff6347",
     marginTop: "15px",
     textAlign: "center",
     userSelect: "none",
     fontWeight: "bold",
   },
   errorMsg: {
-    color: "#ff6347", // Tomato red for errors
+    color: "#ff6347",
     marginTop: "10px",
     fontWeight: "bold",
   },

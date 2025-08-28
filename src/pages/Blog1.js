@@ -1,101 +1,281 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const translations = {
+  en: {
+    heroTitle: "Top 5 Trends in Sustainable Event Planning",
+    heroParagraph: "Discover how the events industry is embracing sustainability with innovative approaches that reduce environmental impact while creating memorable experiences.",
+    stats: [
+      { number: "89%", label: "of attendees prefer sustainable events" },
+      { number: "42%", label: "reduction in waste at sustainable events" },
+      { number: "+65%", label: "growth in sustainable events since 2018" }
+    ],
+    trendsHeading: "Key Sustainable Event Trends",
+    trendsSubtitle: "Explore the innovative approaches transforming the events industry",
+    implementation: "Implementation Strategies:",
+    trends: [
+      {
+        title: "Zero-Waste Events",
+        description: "The push toward zero-waste events is transforming how we plan and execute gatherings. This approach focuses on minimizing landfill contributions through comprehensive waste reduction strategies.",
+        details: [
+          "Compostable tableware and serving materials",
+          "Digital alternatives to printed materials",
+          "Waste stations with clear sorting instructions",
+          "Partnerships with composting facilities",
+          "Donation programs for leftover food and materials"
+        ],
+        icon: "♻️",
+        stat: "73%",
+        statText: "of event planners report increased attendee satisfaction at zero-waste events"
+      },
+      {
+        title: "Plant-Based Catering",
+        description: "Shifting toward plant-based menus significantly reduces the environmental impact of events while catering to growing dietary preferences.",
+        details: [
+          "Locally-sourced seasonal produce",
+          "Creative plant-based alternatives to traditional dishes",
+          "Reduced food waste through careful planning",
+          "Carbon footprint labeling on menu items",
+          "Partnerships with local organic farms"
+        ],
+        icon: "🌱",
+        stat: "58%",
+        statText: "reduction in carbon footprint compared to meat-based menus"
+      },
+      {
+        title: "Digital Integration",
+        description: "Technology is playing a crucial role in making events more sustainable by reducing the need for physical materials and travel.",
+        details: [
+          "Event apps replacing printed programs",
+          "Virtual attendance options",
+          "Digital signage instead of printed banners",
+          "Online networking platforms",
+          "QR codes for information access"
+        ],
+        icon: "📱",
+        stat: "64%",
+        statText: "of attendees prefer digital event materials over printed ones"
+      },
+      {
+        title: "Sustainable Venues",
+        description: "Choosing the right venue is critical for sustainable events, with a focus on environmental certifications and green practices.",
+        details: [
+          "LEED-certified buildings",
+          "Venues with renewable energy sources",
+          "Natural lighting to reduce energy use",
+          "Water conservation systems",
+          "Accessibility to public transportation"
+        ],
+        icon: "🏢",
+        stat: "81%",
+        statText: "of corporate clients prioritize sustainable venues when planning events"
+      },
+      {
+        title: "Local Sourcing",
+        description: "Supporting local economies while reducing transportation emissions is a key trend in sustainable event planning.",
+        details: [
+          "Locally sourced food and beverages",
+          "Hiring local staff and vendors",
+          "Using local artisans for decor and gifts",
+          "Partnering with community organizations",
+          "Showcasing local culture and traditions"
+        ],
+        icon: "📍",
+        stat: "67%",
+        statText: "reduction in carbon emissions when using local suppliers"
+      }
+    ]
+  },
+  ar: {
+    heroTitle: "أهم 5 اتجاهات في تخطيط الفعاليات المستدامة",
+    heroParagraph: "اكتشف كيف يتبنى قطاع الفعاليات الاستدامة من خلال أساليب مبتكرة تقلل التأثير البيئي وتخلق تجارب لا تُنسى.",
+    stats: [
+      { number: "89%", label: "من الحضور يفضلون الفعاليات المستدامة" },
+      { number: "42%", label: "انخفاض في النفايات في الفعاليات المستدامة" },
+      { number: "+65%", label: "نمو الفعاليات المستدامة منذ 2018" }
+    ],
+    trendsHeading: "اتجاهات الفعاليات المستدامة الرئيسية",
+    trendsSubtitle: "استكشف الأساليب المبتكرة التي تغير قطاع الفعاليات",
+    implementation: "استراتيجيات التنفيذ:",
+    trends: [
+      {
+        title: "فعاليات بدون نفايات",
+        description: "التحول نحو فعاليات بدون نفايات يغير طريقة التخطيط والتنفيذ. يركز هذا النهج على تقليل النفايات من خلال استراتيجيات شاملة.",
+        details: [
+          "أدوات مائدة قابلة للتحلل",
+          "بدائل رقمية للمواد المطبوعة",
+          "محطات فرز النفايات بتعليمات واضحة",
+          "شراكات مع منشآت التسميد",
+          "برامج التبرع بالطعام والمواد المتبقية"
+        ],
+        icon: "♻️",
+        stat: "73%",
+        statText: "من منظمي الفعاليات لاحظوا رضا أكبر للحضور في الفعاليات بدون نفايات"
+      },
+      {
+        title: "الضيافة النباتية",
+        description: "التحول نحو قوائم نباتية يقلل بشكل كبير التأثير البيئي ويلبي التفضيلات الغذائية المتزايدة.",
+        details: [
+          "منتجات موسمية محلية",
+          "بدائل نباتية مبتكرة للأطباق التقليدية",
+          "تقليل هدر الطعام من خلال التخطيط الدقيق",
+          "وضع بصمة الكربون على عناصر القائمة",
+          "شراكات مع مزارع عضوية محلية"
+        ],
+        icon: "🌱",
+        stat: "58%",
+        statText: "انخفاض في البصمة الكربونية مقارنة بالقوائم المعتمدة على اللحوم"
+      },
+      {
+        title: "الدمج الرقمي",
+        description: "تلعب التكنولوجيا دورًا مهمًا في جعل الفعاليات أكثر استدامة من خلال تقليل الحاجة للمواد والسفر.",
+        details: [
+          "تطبيقات الفعاليات بدلاً من البرامج المطبوعة",
+          "خيارات الحضور الافتراضي",
+          "لافتات رقمية بدلاً من البنرات المطبوعة",
+          "منصات تواصل عبر الإنترنت",
+          "رموز QR للوصول للمعلومات"
+        ],
+        icon: "📱",
+        stat: "64%",
+        statText: "من الحضور يفضلون المواد الرقمية على المطبوعة"
+      },
+      {
+        title: "أماكن مستدامة",
+        description: "اختيار المكان المناسب أمر حاسم للفعاليات المستدامة، مع التركيز على الشهادات البيئية والممارسات الخضراء.",
+        details: [
+          "مباني معتمدة LEED",
+          "أماكن تستخدم مصادر الطاقة المتجددة",
+          "إضاءة طبيعية لتقليل استهلاك الطاقة",
+          "أنظمة توفير المياه",
+          "سهولة الوصول لوسائل النقل العامة"
+        ],
+        icon: "🏢",
+        stat: "81%",
+        statText: "من العملاء يفضلون الأماكن المستدامة عند التخطيط للفعاليات"
+      },
+      {
+        title: "المصادر المحلية",
+        description: "دعم الاقتصاد المحلي وتقليل الانبعاثات من النقل هو اتجاه رئيسي في تخطيط الفعاليات المستدامة.",
+        details: [
+          "طعام ومشروبات من مصادر محلية",
+          "توظيف موظفين وموردين محليين",
+          "استخدام حرفيين محليين للديكور والهدايا",
+          "شراكات مع منظمات المجتمع",
+          "عرض الثقافة والتقاليد المحلية"
+        ],
+        icon: "📍",
+        stat: "67%",
+        statText: "انخفاض في الانبعاثات الكربونية عند استخدام الموردين المحليين"
+      }
+    ]
+  },
+  he: {
+    heroTitle: "5 מגמות מובילות בתכנון אירועים בר-קיימא",
+    heroParagraph: "גלה כיצד ענף האירועים מאמץ קיימות עם גישות חדשניות שמפחיתות את ההשפעה הסביבתית ויוצרות חוויות בלתי נשכחות.",
+    stats: [
+      { number: "89%", label: "מהמשתתפים מעדיפים אירועים ברי קיימא" },
+      { number: "42%", label: "הפחתה בפסולת באירועים ברי קיימא" },
+      { number: "+65%", label: "צמיחה באירועים ברי קיימא מאז 2018" }
+    ],
+    trendsHeading: "מגמות מרכזיות באירועים ברי קיימא",
+    trendsSubtitle: "הכירו את הגישות החדשניות שמשנות את ענף האירועים",
+    implementation: "אסטרטגיות יישום:",
+    trends: [
+      {
+        title: "אירועים ללא פסולת",
+        description: "המעבר לאירועים ללא פסולת משנה את אופן התכנון והביצוע. הגישה מתמקדת בצמצום תרומה למטמנות באמצעות אסטרטגיות הפחתת פסולת.",
+        details: [
+          "כלים חד פעמיים מתכלים",
+          "חלופות דיגיטליות לחומרים מודפסים",
+          "תחנות מיון פסולת עם הוראות ברורות",
+          "שיתופי פעולה עם מתקני קומפוסט",
+          "תרומת מזון וחומרים שנותרו"
+        ],
+        icon: "♻️",
+        stat: "73%",
+        statText: "מארגני אירועים מדווחים על שביעות רצון גבוהה יותר באירועים ללא פסולת"
+      },
+      {
+        title: "קייטרינג מבוסס צומח",
+        description: "מעבר לתפריטים מבוססי צומח מפחית משמעותית את ההשפעה הסביבתית ומותאם להעדפות תזונתיות גדלות.",
+        details: [
+          "תוצרת עונתית מקומית",
+          "חלופות יצירתיות למנות מסורתיות",
+          "הפחתת בזבוז מזון באמצעות תכנון מדויק",
+          "סימון טביעת רגל פחמנית בתפריט",
+          "שיתופי פעולה עם חוות אורגניות מקומיות"
+        ],
+        icon: "🌱",
+        stat: "58%",
+        statText: "הפחתה בטביעת הרגל הפחמנית לעומת תפריטים מבוססי בשר"
+      },
+      {
+        title: "שילוב דיגיטלי",
+        description: "הטכנולוגיה תורמת לקיימות האירועים על ידי הפחתת הצורך בחומרים פיזיים ונסיעות.",
+        details: [
+          "אפליקציות אירועים במקום תוכניות מודפסות",
+          "אפשרויות השתתפות וירטואלית",
+          "שילוט דיגיטלי במקום באנרים מודפסים",
+          "פלטפורמות נטוורקינג אונליין",
+          "קודי QR לגישה למידע"
+        ],
+        icon: "📱",
+        stat: "64%",
+        statText: "מהמשתתפים מעדיפים חומרים דיגיטליים על פני מודפסים"
+      },
+      {
+        title: "מקומות ברי קיימא",
+        description: "בחירת המקום הנכון קריטית לאירועים ברי קיימא, תוך דגש על תקנים סביבתיים ופרקטיקות ירוקות.",
+        details: [
+          "מבנים עם תקן LEED",
+          "מקומות עם אנרגיה מתחדשת",
+          "תאורה טבעית להפחתת צריכת אנרגיה",
+          "מערכות חיסכון במים",
+          "נגישות לתחבורה ציבורית"
+        ],
+        icon: "🏢",
+        stat: "81%",
+        statText: "לקוחות עסקיים מעדיפים מקומות ברי קיימא בתכנון אירועים"
+      },
+      {
+        title: "מקוריות מקומית",
+        description: "תמיכה בכלכלה המקומית והפחתת פליטות תחבורה הם מגמות מרכזיות בתכנון אירועים ברי קיימא.",
+        details: [
+          "מזון ומשקאות ממקורות מקומיים",
+          "העסקת צוות וספקים מקומיים",
+          "שימוש באומנים מקומיים לעיצוב ומתנות",
+          "שיתופי פעולה עם ארגוני קהילה",
+          "הצגת תרבות ומסורת מקומית"
+        ],
+        icon: "📍",
+        stat: "67%",
+        statText: "הפחתה בפליטות פחמן בשימוש בספקים מקומיים"
+      }
+    ]
+  }
+};
 
 const Blog1 = () => {
+  const { language } = useLanguage();
   const [activeTrend, setActiveTrend] = useState(0);
 
-  const trends = [
-    {
-      title: "Zero-Waste Events",
-      description: "The push toward zero-waste events is transforming how we plan and execute gatherings. This approach focuses on minimizing landfill contributions through comprehensive waste reduction strategies.",
-      details: [
-        "Compostable tableware and serving materials",
-        "Digital alternatives to printed materials",
-        "Waste stations with clear sorting instructions",
-        "Partnerships with composting facilities",
-        "Donation programs for leftover food and materials"
-      ],
-      icon: "♻️",
-      stat: "73%",
-      statText: "of event planners report increased attendee satisfaction at zero-waste events"
-    },
-    {
-      title: "Plant-Based Catering",
-      description: "Shifting toward plant-based menus significantly reduces the environmental impact of events while catering to growing dietary preferences.",
-      details: [
-        "Locally-sourced seasonal produce",
-        "Creative plant-based alternatives to traditional dishes",
-        "Reduced food waste through careful planning",
-        "Carbon footprint labeling on menu items",
-        "Partnerships with local organic farms"
-      ],
-      icon: "🌱",
-      stat: "58%",
-      statText: "reduction in carbon footprint compared to meat-based menus"
-    },
-    {
-      title: "Digital Integration",
-      description: "Technology is playing a crucial role in making events more sustainable by reducing the need for physical materials and travel.",
-      details: [
-        "Event apps replacing printed programs",
-        "Virtual attendance options",
-        "Digital signage instead of printed banners",
-        "Online networking platforms",
-        "QR codes for information access"
-      ],
-      icon: "📱",
-      stat: "64%",
-      statText: "of attendees prefer digital event materials over printed ones"
-    },
-    {
-      title: "Sustainable Venues",
-      description: "Choosing the right venue is critical for sustainable events, with a focus on environmental certifications and green practices.",
-      details: [
-        "LEED-certified buildings",
-        "Venues with renewable energy sources",
-        "Natural lighting to reduce energy use",
-        "Water conservation systems",
-        "Accessibility to public transportation"
-      ],
-      icon: "🏢",
-      stat: "81%",
-      statText: "of corporate clients prioritize sustainable venues when planning events"
-    },
-    {
-      title: "Local Sourcing",
-      description: "Supporting local economies while reducing transportation emissions is a key trend in sustainable event planning.",
-      details: [
-        "Locally sourced food and beverages",
-        "Hiring local staff and vendors",
-        "Using local artisans for decor and gifts",
-        "Partnering with community organizations",
-        "Showcasing local culture and traditions"
-      ],
-      icon: "📍",
-      stat: "67%",
-      statText: "reduction in carbon emissions when using local suppliers"
-    }
-  ];
+  const t = translations[language];
 
   return (
     <div className="sustainable-events">
       {/* Section 1: Hero and Introduction */}
       <section className="sustainable-hero">
         <div className="container">
-          <h1>Top 5 Trends in Sustainable Event Planning</h1>
-          <p>Discover how the events industry is embracing sustainability with innovative approaches that reduce environmental impact while creating memorable experiences.</p>
+          <h1>{t.heroTitle}</h1>
+          <p>{t.heroParagraph}</p>
           <div className="stats-bar">
-            <div className="stat-item">
-              <span className="stat-number">89%</span>
-              <span className="stat-label">of attendees prefer sustainable events</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">42%</span>
-              <span className="stat-label">reduction in waste at sustainable events</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">+65%</span>
-              <span className="stat-label">growth in sustainable events since 2018</span>
-            </div>
+            {t.stats.map((stat, idx) => (
+              <div className="stat-item" key={idx}>
+                <span className="stat-number">{stat.number}</span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -103,12 +283,12 @@ const Blog1 = () => {
       {/* Section 2: Interactive Trends */}
       <section className="trends-section">
         <div className="container">
-          <h2>Key Sustainable Event Trends</h2>
-          <p className="section-subtitle">Explore the innovative approaches transforming the events industry</p>
+          <h2>{t.trendsHeading}</h2>
+          <p className="section-subtitle">{t.trendsSubtitle}</p>
           
           <div className="trends-container">
             <div className="trends-nav">
-              {trends.map((trend, index) => (
+              {t.trends.map((trend, index) => (
                 <button
                   key={index}
                   className={`trend-nav-item ${index === activeTrend ? 'active' : ''}`}
@@ -122,19 +302,19 @@ const Blog1 = () => {
             
             <div className="trend-content">
               <div className="trend-header">
-                <h3>{trends[activeTrend].title}</h3>
+                <h3>{t.trends[activeTrend].title}</h3>
                 <div className="trend-stat">
-                  <span className="stat-figure">{trends[activeTrend].stat}</span>
-                  <span className="stat-desc">{trends[activeTrend].statText}</span>
+                  <span className="stat-figure">{t.trends[activeTrend].stat}</span>
+                  <span className="stat-desc">{t.trends[activeTrend].statText}</span>
                 </div>
               </div>
               
-              <p>{trends[activeTrend].description}</p>
+              <p>{t.trends[activeTrend].description}</p>
               
               <div className="trend-details">
-                <h4>Implementation Strategies:</h4>
+                <h4>{t.implementation}</h4>
                 <ul>
-                  {trends[activeTrend].details.map((detail, index) => (
+                  {t.trends[activeTrend].details.map((detail, index) => (
                     <li key={index}>{detail}</li>
                   ))}
                 </ul>
