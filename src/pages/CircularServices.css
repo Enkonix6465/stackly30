@@ -12,7 +12,7 @@
 
 /* Base styles for the section */
 .circular-services-section {
-  padding: 10px px;
+  padding: 10px; /* FIXED: was '10px px' */
   background-color: #ffffff;
   color: #333;
 }
