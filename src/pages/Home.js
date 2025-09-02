@@ -5,6 +5,8 @@ import CircularServices from './CircularServices';
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 
+const rtlLanguages = ["ar", "he"];
+
 const TestimonialCard = ({ name, company, quote, image }) => (
   <div className="testimonial-card">
     <div className="testimonial-header">
@@ -58,6 +60,7 @@ function Home() {
   const videoRef = useRef();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   useEffect(() => {
     const videoEl = videoRef.current;
@@ -213,7 +216,13 @@ function Home() {
   };
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="hero-container">
         <video
           ref={videoRef}

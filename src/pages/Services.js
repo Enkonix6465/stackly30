@@ -4,10 +4,13 @@ import { useDarkMode } from "../context/Darkmodecontext";
 import { useLanguage } from "../context/LanguageContext"; // <-- Add this
 import "./Services.css";
 
+const rtlLanguages = ["ar", "he"];
+
 const Services = () => {
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
-  const { language } = useLanguage(); // <-- Use language context
+  const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   useEffect(() => {
     const faqQuestions = document.querySelectorAll('.faq-question');
@@ -298,7 +301,13 @@ const Services = () => {
   };
 
   return (
-    <div className={darkMode ? "service-page dark-mode" : "service-page light-mode"}>
+    <div
+      className={darkMode ? "service-page dark-mode" : "service-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="hero-container-service">
         <video
           className="hero-video-service"

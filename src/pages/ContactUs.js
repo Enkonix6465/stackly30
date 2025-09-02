@@ -372,6 +372,24 @@ function ContactUs() {
               </div>
             ))}
           </div>
+          {/* Map Section */}
+          <div className="contact-map" style={{ marginTop: "40px", textAlign: "center" }}>
+            <h3>
+              {language === "en" && "Our Location"}
+              {language === "ar" && "موقعنا"}
+              {language === "he" && "המיקום שלנו"}
+            </h3>
+            <iframe
+              title="Event Location"
+              src="images/map.jpg"
+              width="100%"
+              height="300"
+              style={{ border: 0, borderRadius: "10px" }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </section>
     </div>

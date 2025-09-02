@@ -69,12 +69,21 @@ const translations = {
   }
 };
 
+const rtlLanguages = ["ar", "he"];
+
 const Footer = () => {
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
   const t = translations[language];
 
   return (
-    <footer className="footer">
+    <footer
+      className="footer"
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="footer-container">
         {/* Logo and About */}
         <div className="footer-section">

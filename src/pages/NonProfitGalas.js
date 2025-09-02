@@ -4,6 +4,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { FaHandshake, FaTrophy, FaAward } from 'react-icons/fa';
 import './NonProfitGalas.css';
 
+const rtlLanguages = ["ar", "he"];
+
 const translations = {
   en: {
     heroTagline: "Join the Movement for Good",
@@ -205,14 +207,20 @@ const NonProfitGalas = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
   };
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
-
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       {/* Hero Section */}
       <div className="hero-container-corporate">
         <video

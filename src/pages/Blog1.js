@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
+const rtlLanguages = ["ar", "he"];
+
 const translations = {
   en: {
     heroTitle: "Top 5 Trends in Sustainable Event Planning",
@@ -20,7 +22,7 @@ const translations = {
         details: [
           "Compostable tableware and serving materials",
           "Digital alternatives to printed materials",
-          "Waste stations with clear sorting instructions",
+          "Waste stations with clear instructions",
           "Partnerships with composting facilities",
           "Donation programs for leftover food and materials"
         ],
@@ -72,7 +74,7 @@ const translations = {
       },
       {
         title: "Local Sourcing",
-        description: "Supporting local economies while reducing transportation emissions is a key trend in sustainable event planning.",
+        description: "Supporting local economies and reducing transportation emissions is a key trend in sustainable event planning.",
         details: [
           "Locally sourced food and beverages",
           "Hiring local staff and vendors",
@@ -261,9 +263,16 @@ const Blog1 = () => {
   const [activeTrend, setActiveTrend] = useState(0);
 
   const t = translations[language];
+  const isRTL = rtlLanguages.includes(language);
 
   return (
-    <div className="sustainable-events">
+    <div
+      className="sustainable-events"
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       {/* Section 1: Hero and Introduction */}
       <section className="sustainable-hero">
         <div className="container">

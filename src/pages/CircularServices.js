@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import './CircularServices.css';
 import { useLanguage } from '../context/LanguageContext';
 
+const rtlLanguages = ["ar", "he"];
+
 const translations = {
   en: {
     subHeading: "WE PLAN AND DELIVER",
@@ -54,6 +56,7 @@ function CircularServices() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,7 +82,14 @@ function CircularServices() {
   const t = translations[language];
 
   return (
-    <section ref={sectionRef} className="circular-services-section">
+    <section
+      ref={sectionRef}
+      className="circular-services-section"
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="circular-services-container">
         {/* Left-side content */}
         <div className="circular-services-content-wrapper">

@@ -22,6 +22,8 @@ const clients = [
   { id: 6, logoUrl: '/images/client6.jpg', alt: 'Aranca' },
 ];
 
+const rtlLanguages = ["ar", "he"];
+
 function Home2() {
   const navigate = useNavigate();
   const handleGetStarted = (path) => navigate(path);
@@ -29,7 +31,8 @@ function Home2() {
   const clientsRef = useRef(null);
   const [isClientsVisible, setIsClientsVisible] = useState(false);
   const { darkMode } = useDarkMode();
-  const { language } = useLanguage(); // <-- Use language context
+  const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -126,7 +129,13 @@ function Home2() {
   ];
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       {/* Hero Section with autoplay video */}
       <div className="hero-container-home2">
         <video

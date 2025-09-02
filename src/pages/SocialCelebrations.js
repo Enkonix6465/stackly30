@@ -4,6 +4,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { FaHandshake, FaTrophy, FaAward } from 'react-icons/fa';
 import './SocialCelebrations.css';
 
+const rtlLanguages = ["ar", "he"];
+
 const translations = {
   en: {
     heroTagline: "Celebrate, Connect, Cherish",
@@ -39,7 +41,7 @@ const translations = {
     processSub: "From initial concept to flawless execution, we guide you every step of the way.",
     processSteps: [
       { step: "1", title: "Discovery & Strategy", desc: "We start by understanding your goals, vision, and budget to create a tailored event strategy." },
-      { step: "2", title: "Design & Curation", desc: "Our team develops a creative concept, curating every element from venue to decor and entertainment." },
+      { step: "2", title: "Design & Curation", desc: "Our team develops a creative concept, curating every element from venue to decor to entertainment." },
       { step: "3", title: "Execution & Management", desc: "We handle all logistics, vendor coordination, and on-site management for a stress-free event day." },
       { step: "4", title: "Post-Event Evaluation", desc: "After the event, we provide a detailed report and gather feedback to measure success." }
     ],
@@ -91,8 +93,8 @@ const translations = {
     conferencesBack: "استضف مؤتمرًا عالميًا. يضمن فريقنا تجربة سلسة من البداية إلى النهاية.",
     awardsTitle: "حفلات الجوائز",
     awardsDesc: "تنظيم احتفالات أنيقة ولا تُنسى تكرم الإنجازات والنجاح.",
-    awardsBack: "احتفل بنجاح فريقك مع حفل جوائز رائع ومنظم.",
-    spotlightHeading: "تسليط الضوء على العميل: احتفال Innovatech السنوي",
+    awardsBack: "احتفل بنجاح فريقك مع حفل توزيع جوائز رائع ومنظم.",
+    spotlightHeading: "تسليط الضوء على العميل: الاحتفال السنوي لـ Innovatech",
     spotlightParagraph: "بعد عام طويل من العمل عن بُعد، أرادت Innovatech إعادة إشعال روح الفريق والتواصل مع تجمع لا يُنسى ومليء بالمشاعر. كانوا يبحثون عن احتفال يجمع بين التقدير والتفاعل الحقيقي.",
     spotlightDetails: [
       { label: "نوع الحدث", value: "مؤتمر هجين" },
@@ -205,14 +207,20 @@ const SocialCelebrations = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
   };
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
-
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       {/* Hero Section */}
       <div className="hero-container-corporate">
         <video

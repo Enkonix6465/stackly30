@@ -4,11 +4,13 @@ import { useLanguage } from '../context/LanguageContext'; // <-- Add this
 import { FaHandshake, FaTrophy, FaAward } from 'react-icons/fa';
 import './CorporateEvents.css';
 
+const rtlLanguages = ["ar", "he"];
 
 const CorporateEvents = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
-  const { language } = useLanguage(); // <-- Use language context
+  const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
@@ -249,7 +251,13 @@ const CorporateEvents = () => {
   };
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
 
       {/* Hero Section */}
       <div className="hero-container-corporate">

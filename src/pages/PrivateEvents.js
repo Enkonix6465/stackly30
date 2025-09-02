@@ -17,7 +17,7 @@ const translations = {
       "Team-Building Retreats",
       "Award Ceremonies and Banquets"
     ],
-    servicesHeading: "Our Expertise, Your Success",
+    servicesHeading: "Our Expertise",
     networkingTitle: "Networking Events",
     networkingDesc: "Facilitating meaningful connections with engaging and professional networking sessions.",
     networkingBack: "Ready to connect? Let us handle all the details for your next networking event.",
@@ -25,7 +25,7 @@ const translations = {
     conferencesDesc: "Designing seamless and inspiring large-scale events that leave a lasting impression.",
     conferencesBack: "Host a world-class conference. Our team ensures a flawless experience from start to finish.",
     awardsTitle: "Award Ceremonies",
-    awardsDesc: "Crafting elegant and memorable celebrations that honor achievements and success.",
+    awardsDesc: "Crafting elegant and memorable celebrations that honor achievements",
     awardsBack: "Celebrate your team's success with a truly spectacular and well-organized award ceremony.",
     spotlightHeading: "Client Spotlight: Innovatech's Annual Summit",
     spotlightParagraph: "Facing the challenge of a fully remote workforce, Innovatech needed to host an annual summit that felt engaging and connected. We designed a unique hybrid event experience, blending live-streamed presentations with interactive virtual breakouts and personalized networking sessions.",
@@ -201,17 +201,26 @@ const translations = {
   }
 };
 
+const rtlLanguages = ["ar", "he"];
+
 const PrivateEvents = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
   };
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       {/* Hero Section */}
       <div className="hero-container-corporate">
         <video

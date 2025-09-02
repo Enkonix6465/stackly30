@@ -4,10 +4,13 @@ import { useDarkMode } from '../context/Darkmodecontext';
 import { useLanguage } from '../context/LanguageContext';
 import './Blog.css';
 
+const rtlLanguages = ["ar", "he"];
+
 const Blog = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
@@ -546,7 +549,13 @@ const Blog = () => {
   }, [language]);
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="hero-container-blog">
         <video
           className="hero-video-blog"

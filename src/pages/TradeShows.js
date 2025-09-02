@@ -201,10 +201,13 @@ const translations = {
   }
 };
 
+const rtlLanguages = ["ar", "he"];
+
 const TradeShows = () => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
 
   const handleGetStarted = (path) => {
     navigate(path);
@@ -212,177 +215,184 @@ const TradeShows = () => {
 
   return (
     <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
-      {/* Hero Section */}
-      <div className="hero-container-corporate">
-        <video
-          className="hero-video-corporate"
-          src="/images/trade.mp4"
-          autoPlay
-          loop
-          playsInline
-          muted
-        />
-        <div className="hero-content-corporate">
-          <h1 className="hero-tagline-corporate">{translations[language].heroTagline}</h1>
-          <p className="hero-paragraph-corporate">
-            {translations[language].heroParagraph}
-          </p>
-          <div className="hero-btns-corporate">
-            <button className="btn btn-primary" onClick={() => handleGetStarted("/services")}>
-              {translations[language].heroBtn}
-            </button>
+      <div
+        style={{
+          direction: isRTL ? "rtl" : "ltr",
+          textAlign: isRTL ? "right" : "left"
+        }}
+      >
+        {/* Hero Section */}
+        <div className="hero-container-corporate">
+          <video
+            className="hero-video-corporate"
+            src="/images/trade.mp4"
+            autoPlay
+            loop
+            playsInline
+            muted
+          />
+          <div className="hero-content-corporate">
+            <h1 className="hero-tagline-corporate">{translations[language].heroTagline}</h1>
+            <p className="hero-paragraph-corporate">
+              {translations[language].heroParagraph}
+            </p>
+            <div className="hero-btns-corporate">
+              <button className="btn btn-primary" onClick={() => handleGetStarted("/services")}>
+                {translations[language].heroBtn}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Corporate Events Section */}
+        <section className="corporate-events-section">
+          <div className="corporate-events-wrapper">
+            <div className="corporate-events-image-container">
+              <img
+                src="images/trade-s.jpg"
+                alt="Professionals at a corporate event"
+              />
+            </div>
+            <div className="corporate-events-content">
+              <h2>{translations[language].sectionTitle}</h2>
+              <p style={{ textAlign: "justify" }}>
+                {translations[language].sectionDesc}
+              </p>
+              <ul>
+                {translations[language].sectionList.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Showcase Section with Flip-Card Style */}
+        <section className={`services-section ${darkMode ? 'dark-mode' : ''}`}>
+          <div className="services-wrapper">
+            <h2 className="services-heading">{translations[language].servicesHeading}</h2>
+            <div className="services-grid">
+              {/* Flip Card 1 */}
+              <div className="service-card">
+                <div className="service-card-inner">
+                  <div className="service-card-front">
+                    <FaHandshake className="service-icon" />
+                    <h3>{translations[language].networkingTitle}</h3>
+                    <p>{translations[language].networkingDesc}</p>
+                  </div>
+                  <div className="service-card-back">
+                    <p>{translations[language].networkingBack}</p>
+                    <button className="btn">Learn More</button>
+                  </div>
+                </div>
+              </div>
+              {/* Flip Card 2 */}
+              <div className="service-card">
+                <div className="service-card-inner">
+                  <div className="service-card-front">
+                    <FaTrophy className="service-icon" />
+                    <h3>{translations[language].conferencesTitle}</h3>
+                    <p>{translations[language].conferencesDesc}</p>
+                  </div>
+                  <div className="service-card-back">
+                    <p>{translations[language].conferencesBack}</p>
+                    <button className="btn">Learn More</button>
+                  </div>
+                </div>
+              </div>
+              {/* Flip Card 3 */}
+              <div className="service-card">
+                <div className="service-card-inner">
+                  <div className="service-card-front">
+                    <FaAward className="service-icon" />
+                    <h3>{translations[language].awardsTitle}</h3>
+                    <p>{translations[language].awardsDesc}</p>
+                  </div>
+                  <div className="service-card-back">
+                    <p>{translations[language].awardsBack}</p>
+                    <button className="btn">Learn More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="client-spotlight-section">
+          <div className="client-spotlight-wrapper">
+            <div className="spotlight-content">
+              <h2 className="spotlight-heading">{translations[language].spotlightHeading}</h2>
+              <p className="spotlight-paragraph">
+                {translations[language].spotlightParagraph}
+              </p>
+              <div className="spotlight-details">
+                {translations[language].spotlightDetails.map((detail, idx) => (
+                  <div className="detail-item" key={idx}>
+                    {detail.label}: <span>{detail.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="spotlight-image-container">
+              <video
+                src="/images/trade.mp4"
+                alt="Innovatech Annual Summit"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          </div>
+        </section>
+        {/* New Event Planning Process Section */}
+        <section className="event-process-section">
+          <div className="event-process-wrapper">
+            <h2 className="event-process-heading">{translations[language].processTitle}</h2>
+            <p className="event-process-subheading">{translations[language].processSub}</p>
+            <div className="process-grid">
+              {translations[language].processSteps.map((step, idx) => (
+                <div className="process-step" key={idx}>
+                  <div className="step-icon">{step.step}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* New Service Highlights Section */}
+        <section className="service-highlights-section">
+          <div className="service-highlights-wrapper">
+            <h2 className="highlights-heading">{translations[language].highlightsTitle}</h2>
+            <p className="highlights-subheading">{translations[language].highlightsSub}</p>
+            <div className="highlight-grid">
+              {translations[language].highlights.map((highlight, idx) => (
+                <div className={`highlight-item${idx === 1 ? " reverse-row" : ""}`} key={idx}>
+                  <div className="highlight-image-container">
+                    <img src={highlight.img} alt={highlight.alt} />
+                  </div>
+                  <div className="highlight-content">
+                    <h3>{highlight.title}</h3>
+                    <p>{highlight.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* Final Call to Action Section */}
+        <section className="cta-final-section">
+          <div className="cta-final-content">
+            <h2>{translations[language].ctaTitle}</h2>
+            <p>
+              {translations[language].ctaDesc}
+            </p>
+            <a href="#contact" className="cta-final-btn" onClick={()=>handleGetStarted("/contact")}>
+              {translations[language].ctaBtn}
+            </a>
+          </div>
+        </section>
       </div>
-
-      {/* Corporate Events Section */}
-      <section className="corporate-events-section">
-        <div className="corporate-events-wrapper">
-          <div className="corporate-events-image-container">
-            <img
-              src="images/trade-s.jpg"
-              alt="Professionals at a corporate event"
-            />
-          </div>
-          <div className="corporate-events-content">
-            <h2>{translations[language].sectionTitle}</h2>
-            <p style={{ textAlign: "justify" }}>
-              {translations[language].sectionDesc}
-            </p>
-            <ul>
-              {translations[language].sectionList.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Showcase Section with Flip-Card Style */}
-      <section className={`services-section ${darkMode ? 'dark-mode' : ''}`}>
-        <div className="services-wrapper">
-          <h2 className="services-heading">{translations[language].servicesHeading}</h2>
-          <div className="services-grid">
-            {/* Flip Card 1 */}
-            <div className="service-card">
-              <div className="service-card-inner">
-                <div className="service-card-front">
-                  <FaHandshake className="service-icon" />
-                  <h3>{translations[language].networkingTitle}</h3>
-                  <p>{translations[language].networkingDesc}</p>
-                </div>
-                <div className="service-card-back">
-                  <p>{translations[language].networkingBack}</p>
-                  <button className="btn">Learn More</button>
-                </div>
-              </div>
-            </div>
-            {/* Flip Card 2 */}
-            <div className="service-card">
-              <div className="service-card-inner">
-                <div className="service-card-front">
-                  <FaTrophy className="service-icon" />
-                  <h3>{translations[language].conferencesTitle}</h3>
-                  <p>{translations[language].conferencesDesc}</p>
-                </div>
-                <div className="service-card-back">
-                  <p>{translations[language].conferencesBack}</p>
-                  <button className="btn">Learn More</button>
-                </div>
-              </div>
-            </div>
-            {/* Flip Card 3 */}
-            <div className="service-card">
-              <div className="service-card-inner">
-                <div className="service-card-front">
-                  <FaAward className="service-icon" />
-                  <h3>{translations[language].awardsTitle}</h3>
-                  <p>{translations[language].awardsDesc}</p>
-                </div>
-                <div className="service-card-back">
-                  <p>{translations[language].awardsBack}</p>
-                  <button className="btn">Learn More</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="client-spotlight-section">
-        <div className="client-spotlight-wrapper">
-          <div className="spotlight-content">
-            <h2 className="spotlight-heading">{translations[language].spotlightHeading}</h2>
-            <p className="spotlight-paragraph">
-              {translations[language].spotlightParagraph}
-            </p>
-            <div className="spotlight-details">
-              {translations[language].spotlightDetails.map((detail, idx) => (
-                <div className="detail-item" key={idx}>
-                  {detail.label}: <span>{detail.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="spotlight-image-container">
-            <video
-              src="/images/trade.mp4"
-              alt="Innovatech Annual Summit"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </div>
-      </section>
-      {/* New Event Planning Process Section */}
-      <section className="event-process-section">
-        <div className="event-process-wrapper">
-          <h2 className="event-process-heading">{translations[language].processTitle}</h2>
-          <p className="event-process-subheading">{translations[language].processSub}</p>
-          <div className="process-grid">
-            {translations[language].processSteps.map((step, idx) => (
-              <div className="process-step" key={idx}>
-                <div className="step-icon">{step.step}</div>
-                <h3>{step.title}</h3>
-                <p>{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* New Service Highlights Section */}
-      <section className="service-highlights-section">
-        <div className="service-highlights-wrapper">
-          <h2 className="highlights-heading">{translations[language].highlightsTitle}</h2>
-          <p className="highlights-subheading">{translations[language].highlightsSub}</p>
-          <div className="highlight-grid">
-            {translations[language].highlights.map((highlight, idx) => (
-              <div className={`highlight-item${idx === 1 ? " reverse-row" : ""}`} key={idx}>
-                <div className="highlight-image-container">
-                  <img src={highlight.img} alt={highlight.alt} />
-                </div>
-                <div className="highlight-content">
-                  <h3>{highlight.title}</h3>
-                  <p>{highlight.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* Final Call to Action Section */}
-      <section className="cta-final-section">
-        <div className="cta-final-content">
-          <h2>{translations[language].ctaTitle}</h2>
-          <p>
-            {translations[language].ctaDesc}
-          </p>
-          <a href="#contact" className="cta-final-btn" onClick={()=>handleGetStarted("/contact")}>
-            {translations[language].ctaBtn}
-          </a>
-        </div>
-      </section>
     </div>
   );
 };

@@ -3,9 +3,12 @@ import './AboutUs.css';
 import { useDarkMode } from "../context/Darkmodecontext";
 import { useLanguage } from "../context/LanguageContext";
 
+const rtlLanguages = ["ar", "he"];
+
 function AboutUs() {
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
   const videoRef = useRef(null);
 
   const translations = {
@@ -186,7 +189,13 @@ function AboutUs() {
   }, []);
 
   return (
-    <div className={darkMode ? "home-page dark-mode" : "home-page light-mode"}>
+    <div
+      className={darkMode ? "home-page dark-mode" : "home-page light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <div className="hero-container-about">
         <video
           ref={videoRef}

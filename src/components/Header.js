@@ -3,12 +3,15 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import { useLanguage } from "../context/LanguageContext";
 
+const rtlLanguages = ["ar", "he"];
+
 const Header = ({ toggleTheme, isDark }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [initials, setInitials] = useState("");
   const [avatarDropdownOpen, setAvatarDropdownOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
+  const isRTL = rtlLanguages.includes(language);
   const avatarRef = useRef(null);
 
   const navigate = useNavigate();
@@ -162,7 +165,13 @@ const Header = ({ toggleTheme, isDark }) => {
   };
 
   return (
-    <header className="header">
+    <header
+      className={isDark ? "header dark-mode" : "header light-mode"}
+      style={{
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <nav className="logo">
         <Link to="/home">
           <img src="/images/logo.png" alt="Logo" />

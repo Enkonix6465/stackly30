@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
+const rtlLanguages = ["ar", "he"];
+
 const translations = {
   en: {
     title: "Budgeting for Your Dream Wedding",
@@ -261,9 +263,16 @@ const Blog3 = () => {
   const [activeSection, setActiveSection] = useState(0);
 
   const t = translations[language];
+  const isRTL = rtlLanguages.includes(language);
 
   return (
-    <div style={styles.container}>
+    <div
+      style={{
+        ...styles.container,
+        direction: isRTL ? "rtl" : "ltr",
+        textAlign: isRTL ? "right" : "left"
+      }}
+    >
       <header style={styles.header}>
         <h1 style={styles.title}>{t.title}</h1>
         <p style={styles.subtitle}>{t.subtitle}</p>
