@@ -211,7 +211,7 @@
 ------------------*/
 .why-us-section {
   padding: 10px 20px;
- 
+ margin-bottom: 20px;
   text-align: center;
   transition: background-color 0.5s, color 0.5s;
 }
@@ -304,7 +304,7 @@
   Event Description Section
 ------------------*/
 .event-description-section {
-  padding: 40px 20px;
+  padding: 10px 20px;
   margin: 10px 0;
   text-align: center;
   transition: background-color 0.5s, color 0.5s;
@@ -339,28 +339,31 @@
 ------------------*/
 .section-container {
   display: flex;
-  padding: 0px 20px;
   align-items: stretch;
+  padding: 0px 20px;
   transition: background-color 0.5s ease, color 0.5s ease;
   margin-bottom: 0;
+  min-height: 400px; /* Ensure both sides have the same minimum height */
 }
 .text-content {
   flex: 1;
-  padding: 0px 10px 0px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-right: 15px;
+  /* Remove or adjust padding if needed */
 }
 .image-content {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: stretch; /* Make images fill the container height */
 }
 .image-content img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  max-height: 75vh;
+  max-height: none; /* Remove max-height so it fills the parent */
+  display: block;
 }
 .go-to-page-button {
   background-color: #ff6347;

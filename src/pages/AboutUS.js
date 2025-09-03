@@ -1,4 +1,5 @@
-import  { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AboutUs.css';
 import { useDarkMode } from "../context/Darkmodecontext";
 import { useLanguage } from "../context/LanguageContext";
@@ -6,6 +7,9 @@ import { useLanguage } from "../context/LanguageContext";
 const rtlLanguages = ["ar", "he"];
 
 function AboutUs() {
+  const navigate = useNavigate(); // <-- Move useNavigate inside the component
+  const handleGetStarted = (path) => navigate(path);
+
   const { darkMode } = useDarkMode();
   const { language } = useLanguage();
   const isRTL = rtlLanguages.includes(language);
@@ -212,7 +216,7 @@ function AboutUs() {
             {translations[language].heroParagraph}
           </p>
           <div className="hero-btns-about">
-            <button className="btn">{translations[language].heroBtn}</button>
+            <button className="btn" onClick={() => handleGetStarted("/services")}>{translations[language].heroBtn}</button>
           </div>
         </div>
       </div>
@@ -319,7 +323,7 @@ function AboutUs() {
           <p className="contact-text-minimal">
             {translations[language].contactPara}
           </p>
-          <button className="contact-button-minimal">{translations[language].contactBtn}</button>
+          <button className="contact-button-minimal" onClick={() => handleGetStarted("/contact")}>{translations[language].contactBtn}</button>
         </div>
       </section>
     </div>
