@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import "./Footer.css";
 import { useLanguage } from "../context/LanguageContext";
@@ -122,7 +122,7 @@ const Footer = () => {
         <div className="footer-section">
           <h4>{t.connect}</h4>
           <div className="footer-social">
-            <a
+            <Link
               href="https://www.linkedin.com/login"
               aria-label="LinkedIn"
               target="_blank"
@@ -133,8 +133,8 @@ const Footer = () => {
                 alt="LinkedIn"
                 style={{ width: "24px", height: "24px" }}
               />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.twitter.com/"
               aria-label="Twitter"
               target="_blank"
@@ -145,8 +145,8 @@ const Footer = () => {
                 alt="Twitter"
                 style={{ width: "24px", height: "24px" }}
               />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.facebook.com"
               aria-label="Facebook"
               target="_blank"
@@ -157,8 +157,8 @@ const Footer = () => {
                 alt="Facebook"
                 style={{ width: "24px", height: "24px" }}
               />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://mail.google.com"
               aria-label="Gmail"
               target="_blank"
@@ -169,7 +169,7 @@ const Footer = () => {
                 alt="Gmail"
                 style={{ width: "24px", height: "24px" }}
               />
-            </a>
+            </Link>
           </div>
           <p className="footer-contact">
             {t.email}: support@stackly.com<br />

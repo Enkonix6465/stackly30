@@ -41,3 +41,13 @@ html[data-theme='dark'] {
   --button-bg: #333;
   --button-text: #f1f1f1;
 }
+[data-aos][data-aos][data-aos-delay="50"], body[data-aos-delay="50"] [data-aos] {
+  transition-delay: 0.05s;
+}
+[data-aos][data-aos][data-aos-delay="100"], body[data-aos-delay="100"] [data-aos] {
+  transition-delay: 0.1s;
+}
+/* ...and so on for each delay value... */
+[data-aos][data-aos][data-aos-delay="3000"], body[data-aos-delay="3000"] [data-aos] {
+  transition-delay: 3s;
+}
