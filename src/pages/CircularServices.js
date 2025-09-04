@@ -59,7 +59,6 @@ function CircularServices() {
   const isRTL = rtlLanguages.includes(language);
 
   useEffect(() => {
-    const ref = sectionRef.current; // Copy ref to a local variable
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -69,13 +68,13 @@ function CircularServices() {
       }
     );
 
-    if (ref) {
-      observer.observe(ref);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
     return () => {
-      if (ref) {
-        observer.unobserve(ref); // Use local variable in cleanup
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
       }
     };
   }, []);

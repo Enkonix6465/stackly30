@@ -26,17 +26,14 @@ const Counter = ({ target, duration = 2000 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const ref = counterRef.current;
-    if (ref) {
-      const observer = new IntersectionObserver(
-        ([entry]) => setIsVisible(entry.isIntersecting),
-        { threshold: 0.5 }
-      );
-      observer.observe(ref);
-      return () => {
-        observer.unobserve(ref); // Use the local variable instead of counterRef.current
-      };
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    if (counterRef.current) observer.observe(counterRef.current);
+    return () => {
+      if (counterRef.current) observer.unobserve(counterRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -249,80 +246,50 @@ function Home() {
 
       <section className="why-us-section">
         <div className="container">
-          <h2 className="section-title" data-aos="fade-up">
-            {language === "en" && "Why Choose Us?"}
-            {language === "ar" && "لماذا تختارنا؟"}
-            {language === "he" && "למה לבחור בנו?"}
-          </h2>
+          <h2 className="section-title" data-aos="fade-up">WHY CHOOSE US?</h2>
           <p className="section-para" data-aos="fade-up" data-aos-delay="200">
-            {language === "en" && "We deliver exceptional events with creativity, reliability, and a personal touch."}
-            {language === "ar" && "نحن نقدم فعاليات استثنائية بإبداع وموثوقية ولمسة شخصية."}
-            {language === "he" && "אנחנו מספקים אירועים יוצאי דופן עם יצירתיות, אמינות וגישה אישית."}
+            We go beyond just organizing events—we create experiences that leave a lasting impression.
           </p>
           <div className="line-divider"></div>
           <div className="reasons-container">
             <div className="reason-item" data-aos="fade-up" data-aos-delay="400">
               <div className="icon-wrapper">
-                <i className="fa fa-lightbulb icon-style"></i>
+                <i className="fa fa-file-alt icon-style"></i>
               </div>
-              <h3 className="reason-title">
-                {language === "en" && "Creative Concepts"}
-                {language === "ar" && "أفكار إبداعية"}
-                {language === "he" && "קונספטים יצירתיים"}
-              </h3>
+              <h3 className="reason-title">Proven Track Record</h3>
               <div className="title-underline"></div>
               <p className="reason-description">
-                {language === "en" && "Our team brings fresh ideas and innovative solutions to every event."}
-                {language === "ar" && "فريقنا يقدم أفكارًا جديدة وحلولًا مبتكرة لكل فعالية."}
-                {language === "he" && "הצוות שלנו מביא רעיונות חדשים ופתרונות חדשניים לכל אירוע."}
+                Over 15 years of experience delivering successful events for diverse industries.
               </p>
             </div>
             <div className="reason-item" data-aos="fade-up" data-aos-delay="600">
               <div className="icon-wrapper">
-                <i className="fa fa-handshake icon-style"></i>
+                <i className="fa fa-th-large icon-style"></i>
               </div>
-              <h3 className="reason-title">
-                {language === "en" && "Trusted Partnerships"}
-                {language === "ar" && "شراكات موثوقة"}
-                {language === "he" && "שותפויות אמינות"}
-              </h3>
+              <h3 className="reason-title">Extensive Vendor Network</h3>
               <div className="title-underline"></div>
               <p className="reason-description">
-                {language === "en" && "We work with reliable vendors and partners to ensure quality and success."}
-                {language === "ar" && "نعمل مع موردين وشركاء موثوقين لضمان الجودة والنجاح."}
-                {language === "he" && "אנחנו עובדים עם ספקים ושותפים אמינים להבטחת איכות והצלחה."}
+                Access to trusted vendors across India, the Middle East, and South East Asia for every event need.
               </p>
             </div>
             <div className="reason-item" data-aos="fade-up" data-aos-delay="800">
               <div className="icon-wrapper">
-                <i className="fa fa-money-bill-wave icon-style"></i>
+                <i className="fa fa-rupee-sign icon-style"></i>
               </div>
-              <h3 className="reason-title">
-                {language === "en" && "Value for Money"}
-                {language === "ar" && "قيمة مقابل المال"}
-                {language === "he" && "תמורה לכסף"}
-              </h3>
+              <h3 className="reason-title">Value for Money</h3>
               <div className="title-underline"></div>
               <p className="reason-description">
-                {language === "en" && "We maximize your budget to create memorable experiences without compromise."}
-                {language === "ar" && "نحقق أقصى استفادة من ميزانيتك لصنع تجارب لا تُنسى دون تنازل."}
-                {language === "he" && "אנחנו ממקסמים את התקציב שלך ליצירת חוויות בלתי נשכחות ללא פשרות."}
+                We maximize your budget to deliver impactful events without compromising quality.
               </p>
             </div>
             <div className="reason-item" data-aos="fade-up" data-aos-delay="1000">
               <div className="icon-wrapper">
-                <i className="fa fa-heart icon-style"></i>
+                <i className="fa fa-users icon-style"></i>
               </div>
-              <h3 className="reason-title">
-                {language === "en" && "Personalized Service"}
-                {language === "ar" && "خدمة شخصية"}
-                {language === "he" && "שירות אישי"}
-              </h3>
+              <h3 className="reason-title">Full Transparency</h3>
               <div className="title-underline"></div>
               <p className="reason-description">
-                {language === "en" && "We tailor every detail to your needs, making each event unique."}
-                {language === "ar" && "نخصص كل التفاصيل حسب احتياجاتك، لجعل كل فعالية فريدة."}
-                {language === "he" && "אנחנו מתאימים כל פרט לצרכים שלך, כדי שכל אירוע יהיה ייחודי."}
+                Clear communication and honest processes at every step of your event journey.
               </p>
             </div>
           </div>
