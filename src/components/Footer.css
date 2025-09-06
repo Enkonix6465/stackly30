@@ -3,12 +3,12 @@
   --footer-bg: #ffffff;
   --footer-text: #000000;
   --footer-link: #000000;
-  --footer-link-hover: darkblue;
+  --footer-link-hover: #ff6347;
   --footer-social: #cfd8dc;
-  --footer-social-hover: darkblue;
+  --footer-social-hover: #ff6347;
   --footer-bottom-bg: #ffffff;
-  --scroll-btn-bg: #0077b6;
-  --scroll-btn-hover-bg: #023e8a;
+  --scroll-btn-bg: #ff6347;
+  --scroll-btn-hover-bg: #ff6347;
 }
 
 /* Dark theme overrides */
@@ -16,12 +16,12 @@ html[data-theme='dark'] {
   --footer-bg: #121212;
   --footer-text: #e0e0e0;
   --footer-link: #bbbbbb;
-  --footer-link-hover: #90caf9;
+  --footer-link-hover: #ff6347;
   --footer-social: #b0bec5;
-  --footer-social-hover: #90caf9;
+  --footer-social-hover: #ff6347;
   --footer-bottom-bg: #1e1e1e;
-  --scroll-btn-bg: #1565c0;
-  --scroll-btn-hover-bg: #0d47a1;
+  --scroll-btn-bg: #ff6347;
+  --scroll-btn-hover-bg: #ff6347;
 }
 
 /* Footer styles */

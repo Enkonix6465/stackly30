@@ -241,7 +241,7 @@
   transition: transform 0.3s ease;
 }
 
-.corporate-btn {
+/* .corporate-btn {
   background-color: #e55338;
 }
 
@@ -253,9 +253,18 @@
 
 .corporate-btn:hover:before {
   transform: scaleX(1);
+} */
+ .corporate-btn {
+  background-color: #ff6347;
+  box-shadow: 0 0 0 0 #ff6347;
+  animation: none;
 }
 
-.social-btn {
+.corporate-btn:hover {
+  animation: pulse 1s infinite;
+}
+
+/* .social-btn {
   background-color: #ff6347;
 }
 
@@ -267,8 +276,16 @@
 
 .social-btn:hover:before {
   transform: scaleY(1);
+} */
+.social-btn {
+  background-color: #ff6347;
+  box-shadow: 0 0 0 0 #ff6347;
+  animation: none;
 }
 
+.social-btn:hover {
+  animation: pulse 1s infinite;
+}
 .festival-btn {
   background-color: #ff6347;
   box-shadow: 0 0 0 0 #ff6347;
@@ -285,7 +302,7 @@
   100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
 }
 
-.tradeshow-btn {
+/* .tradeshow-btn {
   background-color: #ff6347;
   transition: transform 0.2s ease-in-out;
   box-shadow: 0 6px 0 #1a242f;
@@ -294,9 +311,17 @@
 .tradeshow-btn:active {
   transform: translateY(4px);
   box-shadow: 0 2px 0 #1a242f;
+} */
+.tradeshow-btn {
+  background-color: #ff6347;
+  box-shadow: 0 0 0 0 #ff6347;
+  animation: none;
 }
 
-.private-btn {
+.tradeshow-btn:hover {
+  animation: pulse 1s infinite;
+}
+/* .private-btn {
   background-color: #ff6347;
   border: 2px solid transparent;
   transition: box-shadow 0.3s ease-in-out;
@@ -304,9 +329,18 @@
 
 .private-btn:hover {
   box-shadow: 0 0 15px #ff6347, 0 0 5px #ff6347;
+} */
+ .private-btn {
+  background-color: #ff6347;
+  box-shadow: 0 0 0 0 #ff6347;
+  animation: none;
 }
 
-.nonprofit-btn {
+.private-btn:hover {
+  animation: pulse 1s infinite;
+}
+
+/* .nonprofit-btn {
   background-color: #e74c3c;
 }
 
@@ -318,8 +352,16 @@
 
 .nonprofit-btn:hover:before {
   transform: scale(1);
+} */
+.nonprofit-btn {
+  background-color: #ff6347;
+  box-shadow: 0 0 0 0 #ff6347;
+  animation: none;
 }
 
+.nonprofit-btn:hover {
+  animation: pulse 1s infinite;
+}
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 1024px) {
   .services-grid-service {

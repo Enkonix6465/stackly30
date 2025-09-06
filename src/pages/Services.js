@@ -70,7 +70,7 @@ const Services = () => {
       whyChooseIntro: "We don't just plan events; we create experiences that resonate. Our unique approach is built on these core principles.",
       features: [
         { icon: "fas fa-magic", title: "Creative Vision", desc: "We blend innovative ideas with flawless execution to bring your unique vision to life." },
-        { icon: "fas fa-handshake-alt", title: "Transparent Process", desc: "From the first consultation to the final detail, you'll have full visibility and control." },
+        { icon: "fas fa-handshake", title: "Transparent Process", desc: "From the first consultation to the final detail, you'll have full visibility and control." },
         { icon: "fas fa-chart-line", title: "Measurable Impact", desc: "We focus on delivering tangible results, ensuring your event achieves its goals and ROI." },
         { icon: "fas fa-user-friends", title: "Dedicated Team", desc: "Your event is handled by a passionate team committed to your success and peace of mind." },
         { icon: "fas fa-shield-alt", title: "Risk Management", desc: "We anticipate challenges and have contingency plans to ensure a smooth, stress-free event." },
@@ -158,7 +158,7 @@ const Services = () => {
       whyChooseIntro: "نحن لا نخطط فقط للفعاليات؛ نحن نخلق تجارب تترك أثراً. نهجنا الفريد مبني على هذه المبادئ الأساسية.",
       features: [
         { icon: "fas fa-magic", title: "رؤية إبداعية", desc: "نمزج الأفكار المبتكرة مع التنفيذ المتقن لتحقيق رؤيتك الفريدة." },
-        { icon: "fas fa-handshake-alt", title: "عملية شفافة", desc: "من الاستشارة الأولى إلى أدق التفاصيل، ستحصل على رؤية كاملة وتحكم كامل." },
+        { icon: "fas fa-handshake", title: "عملية شفافة", desc: "من الاستشارة الأولى إلى أدق التفاصيل، ستحصل على رؤية كاملة وتحكم كامل." },
         { icon: "fas fa-chart-line", title: "تأثير قابل للقياس", desc: "نركز على تحقيق نتائج ملموسة، لضمان نجاح الحدث وتحقيق أهدافك." },
         { icon: "fas fa-user-friends", title: "فريق مخصص", desc: "يدير فريق شغوف فعاليتك ملتزم بنجاحك وراحتك." },
         { icon: "fas fa-shield-alt", title: "إدارة المخاطر", desc: "نتوقع التحديات ولدينا خطط طوارئ لضمان حدث سلس وخالي من التوتر." },
@@ -246,7 +246,7 @@ const Services = () => {
       whyChooseIntro: "אנחנו לא רק מתכננים אירועים; אנחנו יוצרים חוויות שנשארות. הגישה הייחודית שלנו מבוססת על עקרונות אלו.",
       features: [
         { icon: "fas fa-magic", title: "חזון יצירתי", desc: "אנו משלבים רעיונות חדשניים עם ביצוע מושלם כדי להגשים את החזון שלך." },
-        { icon: "fas fa-handshake-alt", title: "תהליך שקוף", desc: "מהפגישה הראשונה ועד הפרט האחרון, תהיה לך שליטה מלאה." },
+        { icon: "fas fa-handshake", title: "תהליך שקוף", desc: "מהפגישה הראשונה ועד הפרט האחרון, תהיה לך שליטה מלאה." },
         { icon: "fas fa-chart-line", title: "השפעה מדידה", desc: "אנחנו מתמקדים בתוצאות מוחשיות, כדי להבטיח שהאירוע שלך יעמוד ביעדים." },
         { icon: "fas fa-user-friends", title: "צוות מסור", desc: "האירוע שלך מנוהל על ידי צוות נלהב שמחויב להצלחה שלך." },
         { icon: "fas fa-shield-alt", title: "ניהול סיכונים", desc: "אנו צופים אתגרים ומכינים תוכניות גיבוי לאירוע חלק וללא דאגות." },
