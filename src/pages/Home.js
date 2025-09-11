@@ -353,13 +353,14 @@ function Home() {
         </div>
       </section>
 
-      <div className="hero-container-home">
+      <div className="hero-container-home" style={{ background: 'black' }}>
         <div className="hero-content-home">
-          <h1 className="hero-title-home">{translations[language].homeTitle}</h1>
-          <p className="hero-subtitle-home">
+          <h2 className="hero-tagline-home" style={{ color: 'white' }}>{translations[language].heroTagline}</h2>
+          <h1 className="hero-title-home" style={{ color: 'white' }}>{translations[language].homeTitle}</h1>
+          <p className="hero-subtitle-home" style={{ color: 'white' }}>
             {translations[language].homeSubtitle}
           </p>
-          <button className="hero-button-home" onClick={() => handleGetStarted("/contact")}>
+          <button className="hero-button-home" style={{ background: 'white', color: 'black' }} onClick={() => handleGetStarted("/contact")}>
             {translations[language].reachOut}
           </button>
         </div>

@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import "./Footer.css";
 import { useLanguage } from "../context/LanguageContext";
@@ -87,10 +86,12 @@ const Footer = () => {
       <div className="footer-container">
         {/* Logo and About */}
         <div className="footer-section">
-          <img src="/images/logo.png" alt="Stackly Logo" className="footer-logo" />
-          <p className="footer-description">
-            {t.about}
-          </p>
+          <div className="footer-about">
+            <img src="/images/logo.png" alt="Stackly Logo" className="footer-logo" />
+            <p>
+              Stackly empowers businesses with innovative event management solutions to plan, execute, and elevate experiences.
+            </p>
+          </div>
         </div>
 
         {/* Quick Links */}
@@ -171,10 +172,10 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <p className="footer-contact">
+          <h3 className="footer-contact">
             {t.email}: support@stackly.com<br />
             {t.phone}: +1 (800) 123-4567
-          </p>
+          </h3>
         </div>
       </div>
 

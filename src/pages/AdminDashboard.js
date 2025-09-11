@@ -133,6 +133,23 @@ function AdminDashboard() {
     ],
   };
 
+  const barOptions = {
+    indexAxis: 'x',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      x: {
+        barThickness: 2, // further reduce bar width
+        maxBarThickness: 3,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
 
@@ -205,7 +222,9 @@ function AdminDashboard() {
           </div>
           <div className="chart-container">
             <h3>{t.registrationsOverTime}</h3>
-            <Bar data={barData} />
+            <div style={{ width: '10cm', minWidth: '10cm', maxWidth: '10cm' }}>
+              <Bar data={barData} options={barOptions} />
+            </div>
           </div>
         </div>
 

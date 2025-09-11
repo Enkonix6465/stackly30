@@ -171,8 +171,17 @@ function Home2() {
         </div>
       </section>
       {/* Why Attend Section */}
-      <section className="why-attend-section" style={{ backgroundImage:`url('/images/bacground-img.jpg')` }}>
-        <div className="why-attend-container">
+      <section className="why-attend-section" style={{ position: 'relative', backgroundImage:`url('/images/bacground-img.jpg')` }}>
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0,0,0,0.55)',
+          zIndex: 1
+        }}></div>
+        <div className="why-attend-container" style={{ position: 'relative', zIndex: 2 }}>
           <p className="why-attend-subtitle">{translations[language].whyAttendSubtitle}</p>
           <h2 className="why-attend-title">{translations[language].whyAttendTitle}</h2>
           <div className="why-attend-divider"></div>
@@ -185,7 +194,7 @@ function Home2() {
       {/* Event Gallery Section */}
       <section className="event-gallery-section">
         <div className="gallery-header-container">
-          <p className="gallery-subtitle">{translations[language].gallerySubtitle}</p>
+          <h2 className="gallery-subtitle">{translations[language].gallerySubtitle}</h2>
           <h2 className="gallery-title">{translations[language].galleryTitle}</h2>
         </div>
         <div className="gallery-container">
@@ -214,6 +223,9 @@ function Home2() {
       <div className="simple-hero-container-contact">
         <div className="simple-hero-background-contact"></div>
         <div className="simple-hero-content-contact">
+          <h2 className="simple-hero-tagline-contact" style={{ textAlign: "center" }}>
+            {translations[language].heroTagline}
+          </h2>
           <p className="simple-hero-paragraph-contact" style={{ textAlign: "center" }}>
             {translations[language].contactParagraph}
           </p>

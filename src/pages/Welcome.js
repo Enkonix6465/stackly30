@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const translations = {
   en: {
-    welcome: "Welcome to",
-    stackly: "STACKLY",
+    // welcome: "Welcome to",
+    // stackly: "STACKLY",
     welcomeBack: "Welcome back, Please login into an account",
     email: "Your Username",
     password: "Enter Password",
@@ -26,8 +26,8 @@ const translations = {
     resetSent: "User found. Please check your email for password reset instructions. (Simulation)"
   },
   ar: {
-    welcome: "مرحبًا في",
-    stackly: "STACKLY",
+    // welcome: "مرحبًا في",
+    // stackly: "STACKLY",
     welcomeBack: "مرحبًا بعودتك، يرجى تسجيل الدخول إلى حسابك",
     email: "اسم المستخدم",
     password: "أدخل كلمة المرور",
@@ -49,8 +49,8 @@ const translations = {
     resetSent: "تم العثور على المستخدم. يرجى مراجعة بريدك الإلكتروني لإعادة تعيين كلمة المرور. (محاكاة)"
   },
   he: {
-    welcome: "ברוכים הבאים ל",
-    stackly: "STACKLY",
+    // welcome: "ברוכים הבאים ל",
+    // stackly: "STACKLY",
     welcomeBack: "ברוך שובך, אנא התחבר לחשבון שלך",
     email: "שם משתמש",
     password: "הזן סיסמה",
@@ -142,12 +142,12 @@ const Welcome = () => {
       return;
     }
 
-    users.push(signUpData);
-    localStorage.setItem("users", JSON.stringify(users));
-    setError("");
-    alert(t.signupSuccess);
-    setSignUpData({ firstName: "", lastName: "", email: "", password: "" });
-    setIsLogin(true);
+  users.push(signUpData);
+  localStorage.setItem("users", JSON.stringify(users));
+  setError("");
+  setSignUpData({ firstName: "", lastName: "", email: "", password: "" });
+  setIsLogin(true);
+  navigate("/login");
   };
 
   const handleForgotPasswordChange = (e) => {
@@ -188,55 +188,70 @@ const Welcome = () => {
       <div style={styles.rightSide}>
         {/* Language Dropdown */}
         <div style={{ marginBottom: 24, textAlign: isRTL ? "right" : "left" }}>
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            style={{
-              padding: "8px 16px",
-              fontSize: "16px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-              background: "#fff",
-              color: "#333",
-              marginBottom: "10px",
-              float: isRTL ? "right" : "left"
-            }}
-          >
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-            <option value="he">עברית</option>
-          </select>
-        </div>
+          {/* Stackly Logo above dropdown, left-aligned */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: isRTL ? "flex-end" : "flex-start", gap: 0, marginBottom: "0px", paddingBottom: "0px" }}>
+            <img src="images/logo.png" alt="Stackly Logo" style={{ width: "120px", height: "auto", marginBottom: "0px" }} />
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              style={{
+                padding: "8px 16px",
+                fontSize: "16px",
+                borderRadius: "5px",
+                border: "1px solid #ccc",
+                background: "#fff",
+                color: "#333",
+        marginBottom: "0px", paddingBottom: "0px"
+              }}
+            >
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+              <option value="he">עברית</option>
+            </select>
+          </div>
+    </div>
 
         {!isForgotPassword ? (
           <>
-            <h1 style={styles.welcomeHeading}>
+            {/* <h1 style={styles.welcomeHeading}>
               {t.welcome} <span style={styles.highlight}>{t.stackly}</span>
-            </h1>
+            </h1> */}
             <p style={styles.welcomeSubtext}>
               {t.welcomeBack}
             </p>
 
             {isLogin ? (
               <form onSubmit={handleLoginSubmit} style={styles.form}>
-                <input
-                  style={styles.input}
-                  type="email"
-                  name="email"
-                  placeholder={t.email}
-                  value={loginData.email}
-                  onChange={handleLoginChange}
-                  required
-                />
-                <input
-                  style={styles.input}
-                  type="password"
-                  name="password"
-                  placeholder={t.password}
-                  value={loginData.password}
-                  onChange={handleLoginChange}
-                  required
-                />
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="login-username" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    Username <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="login-username"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="email"
+                    name="email"
+                    placeholder={t.email}
+                    value={loginData.email}
+                    onChange={handleLoginChange}
+                    required
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="login-password" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    Password <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="login-password"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="password"
+                    name="password"
+                    placeholder={t.password}
+                    value={loginData.password}
+                    onChange={handleLoginChange}
+                    required
+                  />
+                </div>
                 <p
                   style={styles.forgotPassword}
                   onClick={() => {
@@ -251,64 +266,94 @@ const Welcome = () => {
                   <span role="img" aria-label="user-lock" style={{ marginRight: 8 }}>👤🔒</span> {t.login}
                 </button>
                 <p
-                  style={styles.toggle}
-                  onClick={() => {
-                    setError("");
-                    setIsLogin(false);
-                  }}
+                  style={{ ...styles.toggle, cursor: "default" }}
                 >
-                  {t.dontHave}
+                  {t.dontHave.split('Sign Up')[0]}
+                  <span
+                    style={{ textDecoration: "underline", cursor: "pointer" }}
+                    onClick={() => {
+                      setError("");
+                      setIsLogin(false);
+                    }}
+                  >Sign Up</span>
                 </p>
               </form>
             ) : (
               <form onSubmit={handleSignUpSubmit} style={styles.form}>
-                <input
-                  style={styles.input}
-                  type="text"
-                  name="firstName"
-                  placeholder={t.firstName}
-                  value={signUpData.firstName}
-                  onChange={handleSignUpChange}
-                  required
-                />
-                <input
-                  style={styles.input}
-                  type="text"
-                  name="lastName"
-                  placeholder={t.lastName}
-                  value={signUpData.lastName}
-                  onChange={handleSignUpChange}
-                  required
-                />
-                <input
-                  style={styles.input}
-                  type="email"
-                  name="email"
-                  placeholder={t.email}
-                  value={signUpData.email}
-                  onChange={handleSignUpChange}
-                  required
-                />
-                <input
-                  style={styles.input}
-                  type="password"
-                  name="password"
-                  placeholder={t.password}
-                  value={signUpData.password}
-                  onChange={handleSignUpChange}
-                  required
-                />
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="signup-firstName" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    First Name <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="signup-firstName"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="text"
+                    name="firstName"
+                    placeholder={t.firstName}
+                    value={signUpData.firstName}
+                    onChange={handleSignUpChange}
+                    required
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="signup-lastName" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    Last Name <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="signup-lastName"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="text"
+                    name="lastName"
+                    placeholder={t.lastName}
+                    value={signUpData.lastName}
+                    onChange={handleSignUpChange}
+                    required
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="signup-email" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    Email <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="signup-email"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="email"
+                    name="email"
+                    placeholder={t.email}
+                    value={signUpData.email}
+                    onChange={handleSignUpChange}
+                    required
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+                  <label htmlFor="signup-password" style={{ minWidth: "100px", fontWeight: "500", margin: 0 }}>
+                    Password <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    id="signup-password"
+                    style={{ ...styles.input, flex: 1, margin: 0 }}
+                    type="password"
+                    name="password"
+                    placeholder={t.password}
+                    value={signUpData.password}
+                    onChange={handleSignUpChange}
+                    required
+                  />
+                </div>
                 <button type="submit" style={styles.loginButton}>
                   {t.signUp}
                 </button>
                 <p
-                  style={styles.toggle}
-                  onClick={() => {
-                    setError("");
-                    setIsLogin(true);
-                  }}
+                  style={{ ...styles.toggle, cursor: "default" }}
                 >
-                  {t.alreadyHave}
+                  {t.alreadyHave.split('Login')[0]}
+                  <span
+                    style={{ textDecoration: "underline", cursor: "pointer" }}
+                    onClick={() => {
+                      setError("");
+                      setIsLogin(true);
+                    }}
+                  >Login</span>
                 </p>
               </form>
             )}

@@ -1,3 +1,19 @@
+@media (max-width: 1024px) {
+  .rightSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .hamburger {
+    display: flex;
+    order: 99;
+    margin-left: 16px;
+  }
+  .avatarContainer {
+    order: 98;
+  }
+}
 :root {
   --bg-color: white;
   --text-color: black;
@@ -49,6 +65,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: auto;
+  min-width: unset;
 }
 
 /* Nav links */
@@ -92,7 +110,11 @@
 }
 
 .home-dropdown {
-  left: 0;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+  min-width: 50px;
+  margin-left: 0 !important;
 }
 
 .services-dropdown {
@@ -172,6 +194,7 @@
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+    margin-top: 20px;
   }
   
   .nav {

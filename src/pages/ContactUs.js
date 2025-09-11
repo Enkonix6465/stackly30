@@ -358,7 +358,7 @@ function ContactUs() {
       <section className="event-gallery-section">
         <div className="container-contact">
           <h2>{translations[language].galleryTitle}</h2>
-          <p className="section-subtitle">{translations[language].gallerySubtitle}</p>
+          <p className="section-subtitle" style={{ color: 'black' }}>{translations[language].gallerySubtitle}</p>
           <div className="gallery-grid">
             {eventGallery.map(event => (
               <div key={event.id} className="gallery-item">

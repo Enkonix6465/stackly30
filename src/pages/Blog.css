@@ -388,8 +388,8 @@
 /* Event Timeline Styles */
 .event-timeline {
     padding: 60px 20px;
-    background: linear-gradient(135deg, #ff6347 0%, #ff6347 100%);
-    color: white;
+    background-color: #252424;
+       color: white;
     text-align: center;
 }
 
@@ -410,6 +410,7 @@
     margin-top: -30px;
     margin-bottom: 40px;
     opacity: 0.9;
+    color:white
 }
 
 .timeline-container {
@@ -483,6 +484,7 @@
     height: 60px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
+   
     display: flex;
     align-items: center;
     justify-content: center;
@@ -556,10 +558,11 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .tasks-container li i {
-    color:#000000;
+    color: #fff;
     margin-right: 10px;
     font-size: 1.1rem;
 }

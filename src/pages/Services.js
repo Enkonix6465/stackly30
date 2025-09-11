@@ -463,7 +463,7 @@ const Services = () => {
               </button>
             </div>
 
-            <div className="package-box featured-package">
+            <div className="package-box featured-package" style={{ background: '#444', color: 'white' }}>
               <span>Most Popular</span>
               <h3>{translations[language].full}</h3>
               <p className="package-description">{translations[language].fullDesc}</p>
